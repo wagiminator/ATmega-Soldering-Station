@@ -1,4 +1,4 @@
-# ATmega-Soldering-Station
+# T12 Soldering Station based on ATmega328p
 T12 Quick Heating Soldering Station featuring
 - Temperature measurement of the tip
 - Temperature control via rotary encoder
