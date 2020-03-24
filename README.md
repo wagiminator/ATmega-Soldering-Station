@@ -20,4 +20,4 @@ For calibration you need a soldering iron tips thermometer. For best results
 wait at least three minutes after switching on the soldering station before 
 you start the calibration process.
 
-![IMG_20190725_184724_x.jpg](//image.easyeda.com/pullimage/lMNbCyKLu2djiIu4KMF6J3piBIZe0C83hyT8lXgw.jpeg)
+![IMG_20190725_184724_x.jpg](https://image.easyeda.com/pullimage/iSYD3M8FjNd8ndt1cC7noTcUAdRtz9oFH6hKmoNl.jpeg)
