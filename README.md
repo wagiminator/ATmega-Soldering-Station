@@ -27,7 +27,7 @@ Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
 Choose a power supply with an output voltage between 16V and 24V which can provide an output current according to the table below. The power supply must be well stabilized. The current and power is determined by the resistance (R = 8 Ohm) of the heater.
 
 |Voltage (U)|Current (I) = U / R|Power (P) = U² / R|
-|-|-|
+|-|-|-|
 |16 V|2.00 A|32 W|
 |17 V|2.13 A|36 W|
 |18 V|2.25 A|41 W|
