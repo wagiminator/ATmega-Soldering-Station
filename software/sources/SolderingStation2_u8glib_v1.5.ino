@@ -30,6 +30,8 @@
 // Clockspeed:  16 MHz external
 //
 // 2019/2020 by Stefan Wagner with great support from John Glavinos
+// Latest project files: https://easyeda.com/wagiminator
+// License: http://creativecommons.org/licenses/by-sa/3.0/
 
 
 
