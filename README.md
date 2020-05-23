@@ -16,6 +16,8 @@ T12 Quick Heating Soldering Station featuring
 - Calibrating and managing different soldering tips
 - Storing user settings into the EEPROM
 
+Video: https://youtu.be/I9ATDxvQ1Bc
+
 Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
 
 ![IMG_20190731_190146_x.jpg](https://image.easyeda.com/pullimage/iSYD3M8FjNd8ndt1cC7noTcUAdRtz9oFH6hKmoNl.jpeg)
