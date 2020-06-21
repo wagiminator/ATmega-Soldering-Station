@@ -16,13 +16,23 @@ T12 Quick Heating Soldering Station featuring
 - Calibrating and managing different soldering tips
 - Storing user settings into the EEPROM
 
-Video: https://youtu.be/I9ATDxvQ1Bc
+Project Video: https://youtu.be/I9ATDxvQ1Bc
 
 Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
+
+Project Files at EasyEDA: https://easyeda.com/wagiminator/z-solderingstation-smd-v2
+
+# Soldering Station v2.0: #
 
 ![IMG_20190731_190146_x.jpg](https://image.easyeda.com/pullimage/iSYD3M8FjNd8ndt1cC7noTcUAdRtz9oFH6hKmoNl.jpeg)
 
 ![IMG_20190731_182904_x.jpg](https://image.easyeda.com/pullimage/kgryPQpReu7YGh16ewXIt2tQha6rTmhtARw9nPZh.jpeg)
+
+# Soldering Station v2.5: #
+
+![IMG_20200621_132138_x2.jpg](https://image.easyeda.com/pullimage/8LPUnbOCw2uFf1ozHYkTESbvH1LjlA1zKstsrS5v.jpeg)
+
+![IMG_20200621_121350_x.jpg](https://image.easyeda.com/pullimage/5ZW6mQs1im9htCg3NJSryApeGUiSlwTFXnvxJSLq.jpeg)
 
 # 2. Power Supply Specification Requirements #
 
@@ -68,7 +78,15 @@ In addition to the components for the PCB you will need the following:
 - 4 Self-tapping screws (2.3 * 5 mm)
 
 ![parts.jpg](https://image.easyeda.com/pullimage/A29gEDpw2Ld6S96m6f88GDKLpD0YJHm0m3R5Tp5r.jpeg)
+![IMG_20200621_130414_x.jpg](https://image.easyeda.com/pullimage/NQZMhCwVRTmA4HVYrDjr6y938flXDBzT6woWXocX.jpeg)
 
 Make sure that all parts fit nicely into the case. Solder the wires to the connectors and protect them with heat shrinks. Use thick wires (AWG18) for the power connections. Make all connections according to the schematic down below. Solder the wires directly to the corresponding pads on the pcb. Upload the firmware and screw the pcb on top of the case.
 
 ![connections.png](https://image.easyeda.com/pullimage/q0JfyFSQSTueZhpBkhrBhFbxtL1UqRARK1nrKThv.png)
+
+# 6. License #
+
+![license.png](https://i.creativecommons.org/l/by-sa/3.0/88x31.png)
+
+This work is licensed under Creative Commons Attribution-ShareAlike 3.0 Unported License. 
+(http://creativecommons.org/licenses/by-sa/3.0/)
