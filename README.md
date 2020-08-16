@@ -1,6 +1,6 @@
 # T12 Soldering Station based on ATmega328p
 
-!!! ERROR in the current revision: DO NOT USE D4 18V ZENER OR INPUT VOLTAGE MORE THAN 19V !!!
+**!!! ERROR in the current revision: DO NOT USE D4 18V ZENER OR INPUT VOLTAGE MORE THAN 19V !!!**
 
 # 1. Overview #
 
@@ -21,6 +21,8 @@ T12 Quick Heating Soldering Station featuring
 Project Video: https://youtu.be/I9ATDxvQ1Bc
 
 Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
+
+Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 Project Files at EasyEDA: https://easyeda.com/wagiminator/z-solderingstation-smd-v2
 
@@ -44,6 +46,8 @@ Project Files at EasyEDA: https://easyeda.com/wagiminator/z-solderingstation-smd
 4. Get rid of the U8g graphics library and use the ArduBoy graphics Library (Lite) to improve the frame rate and reduce memory usage to make graphics possible
 5. Add flip display Settings to adapt to the habits of different people
 6. Add multilingual support for Chinese and English
+
+Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 ![](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
 
