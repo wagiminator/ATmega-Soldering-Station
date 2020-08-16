@@ -9,10 +9,13 @@
 5. Add flip display Settings to adapt to the habits of different people
 6. Add multilingual support for Chinese and English
 
-![gifbestmaker1597503777536\(1\).gif](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
-![gifbestmaker1597503494208.gif](https://image.lceda.cn/pullimage/cfhvmAOQPhwq7iCPhLvNDeRbOcbccIucCHhU2Abj.gif)
-![gifbestmaker1597503226592.gif](https://image.lceda.cn/pullimage/ij3I4sFpNrQPefPdkgIqGjraDEWEPJYjb4974HlC.gif)
-![gifbestmaker1597503308000.gif](https://image.lceda.cn/pullimage/OsLI0MkxMrv7w0GgVg1tZPt6CMrcyhoFSeOnWrzp.gif)
+![](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
+
+![](https://image.lceda.cn/pullimage/cfhvmAOQPhwq7iCPhLvNDeRbOcbccIucCHhU2Abj.gif)
+
+![](https://image.lceda.cn/pullimage/ij3I4sFpNrQPefPdkgIqGjraDEWEPJYjb4974HlC.gif)
+
+![](https://image.lceda.cn/pullimage/OsLI0MkxMrv7w0GgVg1tZPt6CMrcyhoFSeOnWrzp.gif)
 
 GITHUB [https://github.com/createskyblue/ATmega-Soldering-Station/](https://github.com/createskyblue/ATmega-Soldering-Station/)
 v1.6L Program [https://github.com/createskyblue/ATmega-Soldering-Station/](https://github.com/createskyblue/ATmega-Soldering-Station/)
