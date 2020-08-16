@@ -1,3 +1,22 @@
+![gifbestmaker1597503777536\(1\).gif](//image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
+![gifbestmaker1597503494208.gif](//image.lceda.cn/pullimage/cfhvmAOQPhwq7iCPhLvNDeRbOcbccIucCHhU2Abj.gif)
+![gifbestmaker1597503226592.gif](//image.lceda.cn/pullimage/ij3I4sFpNrQPefPdkgIqGjraDEWEPJYjb4974HlC.gif)
+![gifbestmaker1597503308000.gif](//image.lceda.cn/pullimage/OsLI0MkxMrv7w0GgVg1tZPt6CMrcyhoFSeOnWrzp.gif)
+
+## v1.6L Program UI Upgrade
+
+1. Beautify the detail page and increase the power bar
+2. Menus have ICONS
+3. Better scrolling animation
+4. Get rid of the U8g graphics library and use the ArduBoy graphics Library (Lite) to improve the frame rate and reduce memory usage to make graphics possible
+5. Add flip display Settings to adapt to the habits of different people
+6. Add multilingual support for Chinese and English
+
+GITHUB [https://github.com/createskyblue/ATmega-Soldering-Station/](https://github.com/createskyblue/ATmega-Soldering-Station/)
+
+v1.6L Program [https://github.com/createskyblue/ATmega-Soldering-Station/](https://github.com/createskyblue/ATmega-Soldering-Station/)
+
+
 # T12 Soldering Station based on ATmega328p
 
 !!! ERROR in the current revision: DO NOT USE D4 18V ZENER OR INPUT VOLTAGE MORE THAN 19V !!!
