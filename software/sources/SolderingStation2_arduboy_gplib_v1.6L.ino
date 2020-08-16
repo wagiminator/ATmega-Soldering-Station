@@ -1,5 +1,5 @@
 /*License: http://creativecommons.org/licenses/by-sa/3.0/
- * 采用CC3.0协议共享此程序
+   采用CC3.0协议共享此程序
    您可以自由地：
   共享 — 在任何媒介以任何形式复制、发行本作品
   演绎 — 修改、转换或以本作品为基础进行创作
@@ -335,6 +335,11 @@ int x, y, a, b;
 
 // Control variables
 uint16_t  time2settle = 300;
+
+//模拟数字滚轮 Numerical scrolling effect
+String value;
+int LastValue[3];
+float SlidingAnimationY[3];
 
 // Specify the links and initial PID tuning parameters
 PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
@@ -755,12 +760,8 @@ void MainScreen() {
     arduboy.setCursor(105, 55); arduboy.print(map(Output, 255, 0, 0, 100)); arduboy.print(F("%")); //功率百分比
     arduboy.display();
   } else {
-    arduboy.clear();
-    arduboy.setTextBackground(0);
-    arduboy.setTextColor(1);
-    arduboy.setTextSize(7);
-    arduboy.setCursor(0, 8);
-    if (ShowTemp > 500) arduboy.print(F("000")); else arduboy.print(ShowTemp);
+    
+    if (ShowTemp > 500) DisplayNum(999); else DisplayNum(ShowTemp);;
     arduboy.display();
   }
 
@@ -935,40 +936,36 @@ byte QueryMenuObject() {
   return (wavi + byte(millis() / 100)) * (float(float(num - countMin) / float(countMax - countMin)) - 0.5) * 5;
   }
 */
+
+//模拟数字滚轮 Numerical scrolling effect
+void DisplayNum(int Num) {
+  arduboy.clear();
+  arduboy.setTextSize(6);
+  SetTextColor(0);
+  //数字滚轮
+  for (byte i = 0; i < 3; i++) LastValue[i] = byte(value[i]);
+  value = Num;
+  for (byte i = 0; i < 3; i++) {
+    SlidingAnimationY[i] += (byte(value[i]) - LastValue[i]) * 50;
+    if (SlidingAnimationY[i] != 0) SlidingAnimationY[i] += 0.8 * (-SlidingAnimationY[i]);
+    arduboy.fillRect(0 + i * 44, 0, 38, 50, 1); //白底
+    for (int ii = -1; ii < 2; ii++) {
+      arduboy.setCursor(4 + i * 44, 4 - SlidingAnimationY[i] + ii * 50);
+      arduboy.print(LastValue[i] + ii - 48);
+    }
+  }
+  //刻度标
+  arduboy.fillRect(0, 0, 128, 2, 0); //上遮罩层
+  arduboy.fillRect(0, 51, 128, 13, 0); //下遮罩层
+  arduboy.display();
+}
+
 //数值输入界面
 // input value screen
 uint16_t InputScreen() {
-  String value;
-  int LastValue[3];
-  float SlidingAnimationY[3];
   lastbutton = (!digitalRead(BUTTON_PIN));
   do {
-    arduboy.clear();
-    arduboy.setTextSize(6);
-    SetTextColor(0);
-    //数字滚轮
-    for (byte i = 0; i < 3; i++) LastValue[i] = byte(value[i]);
-    value = getRotary();
-    for (byte i = 0; i < 3; i++) {
-      SlidingAnimationY[i] += (byte(value[i]) - LastValue[i]) * 50;
-      if (SlidingAnimationY[i] != 0) SlidingAnimationY[i] += 0.8 * (-SlidingAnimationY[i]);
-      arduboy.fillRect(0 + i * 44, 0, 38, 50, 1); //白底
-      for (int ii = -1; ii < 2; ii++) {
-        arduboy.setCursor(4 + i * 44, 4 + SlidingAnimationY[i] + ii * 50);
-        arduboy.print(LastValue[i] + ii - 48);
-      }
-    }
-    //刻度标
-    arduboy.fillRect(0, 0, 128, 2, 0); //上遮罩层
-    arduboy.fillRect(0, 51, 128, 13, 0); //下遮罩层
-    /*
-      //波形动画  ---已被阉割：浪费内存呢
-      for (byte i = 0; i < 32; i++)
-      {
-      arduboy.drawLine(i * 4, sin(wav(i, value.toInt())) * 6 + 57, (i + 1) * 4, sin(wav(i + 1, value.toInt())) * 6 + 57);
-      }
-    */
-    arduboy.display();
+    DisplayNum(getRotary());
     CheckLastButton();
   } while (digitalRead(BUTTON_PIN) || lastbutton);
   beep();
