@@ -1,7 +1,7 @@
 # T12 Soldering Station based on ATmega328p
 
 **!!! ERROR in the current revision: DO NOT USE D4 18V ZENER OR INPUT VOLTAGE MORE THAN 19V !!!**
-
+**!!! 此版本存在一个设计错误！不要使用D4 18V 的齐纳稳压二极管 或 输入电压超过19V !!! **
 # 1. Overview #
 
 T12 Quick Heating Soldering Station featuring
