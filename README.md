@@ -1,26 +1,3 @@
-
-
-## v1.6L Program UI Upgrade
-
-1. Beautify the detail page and increase the power bar
-2. Menus have ICONS
-3. Better scrolling animation
-4. Get rid of the U8g graphics library and use the ArduBoy graphics Library (Lite) to improve the frame rate and reduce memory usage to make graphics possible
-5. Add flip display Settings to adapt to the habits of different people
-6. Add multilingual support for Chinese and English
-
-![](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
-
-![](https://image.lceda.cn/pullimage/cfhvmAOQPhwq7iCPhLvNDeRbOcbccIucCHhU2Abj.gif)
-
-![](https://image.lceda.cn/pullimage/ij3I4sFpNrQPefPdkgIqGjraDEWEPJYjb4974HlC.gif)
-
-![](https://image.lceda.cn/pullimage/OsLI0MkxMrv7w0GgVg1tZPt6CMrcyhoFSeOnWrzp.gif)
-
-GITHUB [https://github.com/createskyblue/ATmega-Soldering-Station/](https://github.com/createskyblue/ATmega-Soldering-Station/)
-v1.6L Program [https://github.com/createskyblue/ATmega-Soldering-Station/](https://github.com/createskyblue/ATmega-Soldering-Station/)
-
-
 # T12 Soldering Station based on ATmega328p
 
 !!! ERROR in the current revision: DO NOT USE D4 18V ZENER OR INPUT VOLTAGE MORE THAN 19V !!!
@@ -58,6 +35,23 @@ Project Files at EasyEDA: https://easyeda.com/wagiminator/z-solderingstation-smd
 ![IMG_20200621_132138_x2.jpg](https://image.easyeda.com/pullimage/8LPUnbOCw2uFf1ozHYkTESbvH1LjlA1zKstsrS5v.jpeg)
 
 ![IMG_20200621_121350_x.jpg](https://image.easyeda.com/pullimage/5ZW6mQs1im9htCg3NJSryApeGUiSlwTFXnvxJSLq.jpeg)
+
+# Program v1.6L UI Upgrade
+
+1. Beautify the detail page and increase the power bar
+2. Menus have ICONS
+3. Better scrolling animation
+4. Get rid of the U8g graphics library and use the ArduBoy graphics Library (Lite) to improve the frame rate and reduce memory usage to make graphics possible
+5. Add flip display Settings to adapt to the habits of different people
+6. Add multilingual support for Chinese and English
+
+![](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
+
+![](https://image.lceda.cn/pullimage/cfhvmAOQPhwq7iCPhLvNDeRbOcbccIucCHhU2Abj.gif)
+
+![](https://image.lceda.cn/pullimage/ij3I4sFpNrQPefPdkgIqGjraDEWEPJYjb4974HlC.gif)
+
+![](https://image.lceda.cn/pullimage/OsLI0MkxMrv7w0GgVg1tZPt6CMrcyhoFSeOnWrzp.gif)
 
 # 2. Power Supply Specification Requirements #
 
