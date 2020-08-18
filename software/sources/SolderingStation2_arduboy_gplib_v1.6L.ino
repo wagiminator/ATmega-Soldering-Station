@@ -394,10 +394,10 @@ PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
 
 
 //LANG 语言支持
-/*  0 - ENGLISH
-    1 - 中文
+/*  0 - 中文 CHINESE
+    1 - 英文 ENGLISH
 */
-byte LANG = 0;
+byte LANG = 1;
 void Flip(bool Fmode) {
   arduboy.flipVertical(Fmode);
   arduboy.flipHorizontal(Fmode);
