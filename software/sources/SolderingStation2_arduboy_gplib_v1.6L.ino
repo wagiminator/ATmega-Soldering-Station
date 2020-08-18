@@ -922,6 +922,7 @@ uint8_t MenuScreen(uint8_t selected) {
 
     if (LANG == 0) arduboy.drawSlowXYBitmap(48, 48, Txt_table[selected + QueryMenuObject()], 36, 16, 1); else {
       arduboy.setCursor(48, 49);
+      arduboy.setTextSize(1);
       Print_EN(selected + QueryMenuObject());
     }
 
