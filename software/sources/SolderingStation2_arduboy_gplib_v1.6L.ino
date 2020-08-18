@@ -176,7 +176,6 @@ const unsigned char t_CN_EN[] PROGMEM = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x
 const unsigned char t4f[] PROGMEM = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x1d, 0xc2, 0x08, 0x00, 0x05, 0x44, 0x42, 0x08, 0x00, 0x03, 0x84, 0x5f, 0xbf, 0x00, 0x0f, 0xe4, 0x44, 0x10, 0x00, 0x01, 0x15, 0x45, 0x10, 0x00, 0x05, 0x4c, 0xc9, 0x7f, 0x80, 0x09, 0x24, 0x4f, 0x90, 0x00, 0x07, 0xc4, 0xc1, 0x10, 0x00, 0x05, 0x4d, 0x41, 0x3f, 0x00, 0x05, 0x54, 0x43, 0x81, 0x00, 0x07, 0xc4, 0x4d, 0x02, 0x00, 0x05, 0x44, 0x41, 0x14, 0x00, 0x05, 0x55, 0x41, 0x08, 0x00, 0x07, 0xc8, 0x81, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 //保存
 const unsigned char t_save[] PROGMEM = { 0x02, 0xfe, 0x01, 0x00, 0x00, 0x02, 0x82, 0x3f, 0xff, 0x00, 0x04, 0x82, 0x02, 0x00, 0x00, 0x04, 0xfe, 0x02, 0x00, 0x00, 0x0c, 0x10, 0x04, 0xfc, 0x00, 0x14, 0x10, 0x04, 0x08, 0x00, 0x05, 0xff, 0x8c, 0x10, 0x00, 0x04, 0x10, 0x14, 0x10, 0x00, 0x04, 0x38, 0x25, 0xff, 0x00, 0x04, 0x34, 0x04, 0x10, 0x00, 0x04, 0x52, 0x04, 0x10, 0x00, 0x04, 0x91, 0x84, 0x10, 0x00, 0x05, 0x10, 0x04, 0x50, 0x00, 0x04, 0x10, 0x04, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
-
 const unsigned char *Txt_table[] = {
   t0, t1, t2, t3, t4, t5, t6, t7, Back,  //0
   t0, t1_1, t1_2, t1_3, t1_4, t_save,  //1
@@ -190,6 +189,48 @@ const unsigned char *Txt_table[] = {
   t_NO, t_OK,//9
   t5_3, t4f, t_save, //10
 };
+/*
+   英语库
+*/
+const char EN_0[] PROGMEM = "Tip";
+const char EN_1[] PROGMEM = "Temp";
+const char EN_2[] PROGMEM = "Timer";
+const char EN_3[] PROGMEM = "Control";
+const char EN_4[] PROGMEM = "Screen";
+const char EN_5[] PROGMEM = "Buzzer";
+const char EN_6[] PROGMEM = "Lang";
+const char EN_7[] PROGMEM = "About";
+const char EN_8[] PROGMEM = "Return";
+const char EN_9[] PROGMEM = "Change";
+const char EN_10[] PROGMEM = "Calibrate";
+const char EN_11[] PROGMEM = "Rename";
+const char EN_12[] PROGMEM = "Delete";
+const char EN_13[] PROGMEM = "Add";
+const char EN_14[] PROGMEM = "Save";
+const char EN_15[] PROGMEM = "Default";
+const char EN_16[] PROGMEM = "Sleep";
+const char EN_17[] PROGMEM = "Boost";
+const char EN_18[] PROGMEM = "Save";
+const char EN_19[] PROGMEM = "Sleep";
+const char EN_20[] PROGMEM = "Off";
+const char EN_21[] PROGMEM = "Boost";
+const char EN_22[] PROGMEM = "Save";
+const char EN_23[] PROGMEM = "Direct";
+const char EN_24[] PROGMEM = "PID";
+const char EN_25[] PROGMEM = "Big";
+const char EN_26[] PROGMEM = "Infos";
+const char EN_27[] PROGMEM = "OFF";
+const char EN_28[] PROGMEM = "ON";
+const char EN_29[] PROGMEM = "NO";
+const char EN_30[] PROGMEM = "YES";
+const char EN_31[] PROGMEM = "CN";
+const char EN_32[] PROGMEM = "EN";
+const char EN_33[] PROGMEM = "NO";
+const char EN_34[] PROGMEM = "OK";
+const char EN_35[] PROGMEM = "Main Screen";
+const char EN_36[] PROGMEM = "Flip";
+const char EN_37[] PROGMEM = "Save";
+const char *const EN_table[] PROGMEM = {EN_0, EN_1, EN_2, EN_3, EN_4, EN_5, EN_6, EN_7, EN_8, EN_9, EN_10, EN_11, EN_12, EN_13, EN_14, EN_15, EN_16, EN_17, EN_18, EN_19, EN_20, EN_21, EN_22, EN_23, EN_24, EN_25, EN_26, EN_27, EN_28, EN_29, EN_30, EN_31, EN_32, EN_33, EN_34, EN_35, EN_36, EN_37,};
 
 bool lastbutton;
 #include <Arduboy2.h>  //注意 这里使用被阉割的图形库，只有绘图功能，并非通用的版本
@@ -859,48 +900,12 @@ void TimerScreen() {
   updateEEPROM();
 }
 //英语支持
+
+
 void Print_EN(byte i) {
-  switch (i) {
-    case 0: arduboy.print(F("Tip")); break;
-    case 1: arduboy.print(F("Temp")); break;
-    case 2: arduboy.print(F("Timer")); break;
-    case 3: arduboy.print(F("Control")); break;
-    case 4: arduboy.print(F("Screen")); break;
-    case 5: arduboy.print(F("Buzzer")); break;
-    case 6: arduboy.print(F("Lang")); break;
-    case 7: arduboy.print(F("About")); break;
-    case 8: arduboy.print(F("Return")); break;
-    case 9: arduboy.print(F("Change")); break;
-    case 10: arduboy.print(F("Calibrate")); break;
-    case 11: arduboy.print(F("Rename")); break;
-    case 12: arduboy.print(F("Delete")); break;
-    case 13: arduboy.print(F("Add")); break;
-    case 14: arduboy.print(F("Save")); break;
-    case 15: arduboy.print(F("Default")); break;
-    case 16: arduboy.print(F("Sleep")); break;
-    case 17: arduboy.print(F("Boost")); break;
-    case 18: arduboy.print(F("Save")); break;
-    case 19: arduboy.print(F("Sleep")); break;
-    case 20: arduboy.print(F("Off")); break;
-    case 21: arduboy.print(F("Boost")); break;
-    case 22: arduboy.print(F("Save")); break;
-    case 23: arduboy.print(F("Direct")); break;
-    case 24: arduboy.print(F("PID")); break;
-    case 25: arduboy.print(F("Big")); break;
-    case 26: arduboy.print(F("Infos")); break;
-    case 27: arduboy.print(F("OFF")); break;
-    case 28: arduboy.print(F("ON")); break;
-    case 29: arduboy.print(F("NO")); break;
-    case 30: arduboy.print(F("YES")); break;
-    case 31: arduboy.print(F("CN")); break;
-    case 32: arduboy.print(F("EN")); break;
-    case 33: arduboy.print(F("NO")); break;
-    case 34: arduboy.print(F("OK")); break;
-    case 35: arduboy.print(F("Main Screen")); break;
-    case 36: arduboy.print(F("Flip")); break;
-    case 37: arduboy.print(F("Save")); break;
-    default: arduboy.print(F("???")); break;
-  }
+  char buffer[10];
+  strcpy_P(buffer, (char *)pgm_read_word(&(EN_table[i])));
+  arduboy.print(buffer);
 }
 //菜单界面
 // menu screen
