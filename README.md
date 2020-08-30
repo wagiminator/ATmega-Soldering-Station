@@ -1,17 +1,48 @@
 # 1. Overview #
+T12 焊台控制器功能介绍
 T12 Quick Heating Soldering Station featuring
-- Temperature measurement of the tip
-- Temperature control via rotary encoder
-- Boost mode by short pressing rotary encoder switch
-- Setup menu by long pressing rotary encoder switch
-- Handle movement detection (by checking ball switch)
-- Iron unconnected detection (by idenfying invalid temperature readings)
-- Time driven sleep/power off mode if iron is unused (movement detection)
-- Measurement of input voltage, Vcc and ATmega's internal temperature
-- Information display on OLED
-- Buzzer
-- Calibrating and managing different soldering tips
-- Storing user settings into the EEPROM
+ - 烙铁头温度实时监测
+ - Temperature measurement of the tip
+ - PID温度控制
+ - Direct or PID control of the heater
+ - 可以通过编码器进行控制温度
+ - Temperature control via rotary encoder
+ - 短按编码器进入短时升温模式
+ - Boost mode by short pressing rotary encoder switch
+ - 长按编码器进入主菜单
+ - Setup menu by long pressing rotary encoder switch
+ - 手柄震动检测（需要手柄含有震动传感器）
+ - Handle movement detection (by checking ball switch)
+ - 手柄连接检测（通过判断烙铁头温度是否能够被读取来实现）
+ - Iron unconnected detection (by idenfying invalid temperature readings)
+ - 定时器设定 - 随眠，关机时间
+ - Time driven sleep/power off mode if iron is unused (movement detection)
+ - 可以测量主控芯片电压以及温度
+ - Measurement of input voltage, Vcc and ATmega's internal temperature
+ - 在OLED上实现信息显示
+ - Information display on OLED
+ - 支持无源蜂鸣器
+ - Buzzer
+ - 允许设置不同烙铁头的温度校准值
+ - Calibrating and managing different soldering tips
+ - 设置被保存在EEPROM，掉电不丢失
+ - Storing user settings into the EEPROM
+ - 允许热插拔烙铁头，并弹出烙铁头配置选择菜单
+ - Tip change detection
+ - 芯片过热以及低电压报警
+ - Chip overheating and low voltage alarm
+ - 更好的实时温度条以及实时功率条
+ - Better real-time temperature bar and real-time power bar
+ - 拥有过渡动画
+ - Have transition animation
+ - 内置屏幕保护程序
+ - Built in screen saver
+ - 屏幕翻转设置
+ - Screen flip settings
+ - 内置英文、中文、日文语言包
+ - Built in English, Chinese and Japanese language pack
+ - 开机密码设置
+ - Set System Password
 
 Project Video: https://youtu.be/I9ATDxvQ1Bc
 
@@ -49,6 +80,17 @@ LHW-createskyblue created an awesome upgrade to the user interface which can be 
 
 Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
+#  v1.7+ Program: createskyblue  & UI: lihaoyun6
+	
+- Screen saver
+	屏幕保护程序
+- English, Chinese and Japanese language pack
+	英文、中文、日文语言包
+- System Password
+	开机密码设置
+- Better numerical input experience
+	更好的数值输入体验
+	
 ![](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
 ![](https://image.lceda.cn/pullimage/zIsCozlXO0gjzfxcF4wCfAmhQwTKoQBLKd5zZtRd.gif)
 ![](https://image.lceda.cn/pullimage/cfhvmAOQPhwq7iCPhLvNDeRbOcbccIucCHhU2Abj.gif)
