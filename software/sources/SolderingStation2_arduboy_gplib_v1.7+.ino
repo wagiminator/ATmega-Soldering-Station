@@ -894,7 +894,7 @@ Arduboy2 arduboy;
 #define SWITCH_PIN    10        // handle vibration switch
 
 // Default temperature control values (recommended soldering temperature: 300-380°C)
-#define ChipTempCalVal 315  //芯片内部温度读取校准值 -->可以根据实际情况修改，不同机器情况不同，通常误差在10°C内
+#define ChipTempCalVal 335  //芯片内部温度读取校准值 -->可以根据实际情况修改，不同机器情况不同，通常误差在10°C内
 #define TEMP_MIN      150       // min selectable temperature
 #define TEMP_MAX      400       // max selectable temperature
 #define TEMP_DEFAULT  320       // default start setpoint
@@ -1619,7 +1619,7 @@ void DrawAppText(byte appID) {
   if (LANG == 0) arduboy.drawSlowXYBitmap(48, 48, CN_table[appID], 36, 16, 1); else if (LANG == 2) {
     drawText(48, 52, JP_table[appID], pgm_read_byte(&(JP_Length_table[appID])));
   } else {
-    arduboy.setCursor(48, 49);
+    arduboy.setCursor(48, 52);
     arduboy.setTextSize(1);
     Print_EN(appID);
   }
@@ -1723,7 +1723,7 @@ void DisplayNum(int Num) {
   }
   //刻度标
   arduboy.fillRect(0, 0, 128, 2, 0); //上遮罩层
-  arduboy.fillRect(0, 51, 128, 13, 0); //下遮罩层
+  arduboy.fillRect(0, 48, 128, 16, 0); //下遮罩层
 }
 
 //数值输入界面
@@ -1940,6 +1940,7 @@ uint16_t denoiseAnalog (byte port) {
   return (result >> 5);                 // devide by 32 and return value
 }
 
+/*
 //读取芯片温度
 // get internal temperature by reading ADC channel 8 against 1.1V reference
 double getChipTemp() {
@@ -1954,14 +1955,13 @@ double getChipTemp() {
   t = (wADC - ChipTempCalVal ) / 1.22;
   return (t);
 }
-
-/*
+*/
    // get internal temperature by reading ADC channel 8 against 1.1V reference
   double getChipTemp() {
   uint16_t result = 0;
   ADCSRA |= bit (ADEN) | bit (ADIF);    // enable ADC, turn off any pending interrupt
   ADMUX = bit (REFS1) | bit (REFS0) | bit (MUX3); // set reference and mux
-  delay(20);                            // wait for voltages to settle
+  delay(10);                            // wait for voltages to settle
   set_sleep_mode (SLEEP_MODE_ADC);      // sleep during sample for noise reduction
   for (uint8_t i = 0; i < 32; i++) {    // get 32 readings
     sleep_mode();                       // go to sleep while taking ADC sample
@@ -1972,7 +1972,7 @@ double getChipTemp() {
   result >>= 2;                         // devide by 4
   return ((result - 2594) / 9.76);      // calculate internal temperature in degrees C
   }
-*/
+
 // get input voltage in mV by reading 1.1V reference against AVcc
 uint16_t getVCC() {
   uint16_t result = 0;
