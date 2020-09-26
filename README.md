@@ -99,7 +99,7 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 # Notes and Errors
 
-- In the board version 2.5 the diode D1 may overheat. To be on the safe side, the 18V zener diode D4 should be removed or the soldering station should be operated with a maximum of 19V. Alternatively, the diode D1 can be replaced with an SS54 schottky diode. 
+- In the board version 2.5 the diode D1 may overheat. To be on the safe side, the 18V zener diode D4 should be removed and the soldering station should be operated with a maximum of 20V. Alternatively, the diode D1 can be replaced with an SS54 schottky diode and the BJT Q1 with an FMMT619. 
 
 # 3. Power Supply Specification Requirements #
 
