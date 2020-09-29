@@ -927,7 +927,7 @@ Arduboy2 arduboy;
 #define MAINSCREEN    1         // type of main screen (0: big numbers; 1: more infos)
 
 // EEPROM identifier
-#define EEPROM_IDENT   0x081F   // to identify if EEPROM was written by this program
+#define EEPROM_IDENT   0x140A   // to identify if EEPROM was written by this program
 
 //Beep
 #define SetBeepCoolTime 200
