@@ -1186,7 +1186,7 @@ void SENSORCheck() {
 
   // stabilize displayed temperature when around setpoint
   if ((ShowTemp != Setpoint) || (abs(ShowTemp - CurrentTemp) > 5)) ShowTemp = CurrentTemp;
-
+  if (abs(ShowTemp - Setpoint) <= 1) ShowTemp = Setpoint;
   // set state variable if temperature is in working range; beep if working temperature was just reached
   gap = abs(SetTemp - CurrentTemp);
   if (gap < 5) {
