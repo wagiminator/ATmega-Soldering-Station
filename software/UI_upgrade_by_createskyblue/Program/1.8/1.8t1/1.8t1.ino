@@ -133,8 +133,9 @@ const unsigned char Lang_EN[] PROGMEM = { 0x80, 0x04, 0x00, 0x00, 0x3f, 0xf0, 0x
 const unsigned char Lang_JP[] PROGMEM = { 0x80, 0x04, 0x00, 0x00, 0x3f, 0xf0, 0x3d, 0xf0, 0x20, 0x10, 0x3b, 0xf0, 0x3b, 0x70, 0x30, 0x30, 0x2b, 0x50, 0x2a, 0xd0, 0x31, 0xb0, 0x3f, 0xf0, 0x00, 0x00, 0x80, 0x04 };
 const unsigned char Save[] PROGMEM = { 0x00, 0x04, 0x58, 0x08, 0x58, 0x08, 0x58, 0x08, 0x40, 0x08, 0x7f, 0xf8, 0x60, 0x18, 0x5f, 0xe8, 0x5b, 0x68, 0x5f, 0xe8, 0x5b, 0x68, 0x1c, 0xe8, 0x5f, 0xe8, 0x00, 0x00 };
 const unsigned char Lock[] PROGMEM = { 0xe0, 0x1c, 0xc0, 0x0c, 0x8f, 0xc4, 0x9f, 0xe4, 0x9f, 0xe4, 0x9f, 0xe4, 0x00, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x07, 0x80, 0x07, 0x80, 0x03, 0x00, 0x80, 0x04 };
+const unsigned char Set19[] PROGMEM = { 0xf8, 0x7c, 0x80, 0x04, 0xbc, 0xf4, 0x3f, 0xf0, 0x38, 0x70, 0xb7, 0xb4, 0xb6, 0xb4, 0xb5, 0xb4, 0xb7, 0xb4, 0x38, 0x70, 0x3f, 0xf0, 0xbc, 0xf4, 0x80, 0x04, 0xf8, 0x7c };
 const unsigned char *Ico_table[] = {
-  Set0, Set1, Set2, Set3, Set4, Set5, Set6, Lock, Set_LANG, QRC, Set7,
+  Set0, Set1, Set2, Set3, Set4, Set5, Set19, Set6, Lock, Set_LANG, QRC, Set7,
   Set8, Set9, Set0, Set10, Set12, Save,
   Set0, Set11, Set14, Save,
   Set11, Set13, Set14, Save,
@@ -145,7 +146,7 @@ const unsigned char *Ico_table[] = {
   Lang_CN, Lang_EN, Lang_JP, //8
   Set4, Set4F, Save,
 };
-const byte Menu_table[] = {11, 6, 4, 4, 2, 2, 2, 2, 3, 3}; //菜单 标签 温控 定时 控制方式 首页 蜂鸣器 标签删除确认界面 语言菜单 翻转 显示
+const byte Menu_table[] = {12, 6, 4, 4, 2, 2, 2, 2, 3, 3}; //菜单 标签 温控 定时 控制方式 首页 蜂鸣器 标签删除确认界面 语言菜单 翻转 显示
 byte MenuLevel = 0; //菜单层级
 
 /*////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -197,7 +198,8 @@ const char EN_37[] PROGMEM = "Save";
 const char EN_38[] PROGMEM = "About";
 const char EN_39[] PROGMEM = "JP";
 const char EN_40[] PROGMEM = "Lock";
-const char *const EN_table[] PROGMEM = {EN_0, EN_1, EN_2, EN_3, EN_4, EN_5, EN_6, EN_40, EN_7, EN_38, EN_8, EN_9, EN_10, EN_11, EN_12, EN_13, EN_14, EN_15, EN_16, EN_17, EN_18, EN_19, EN_20, EN_21, EN_22, EN_23, EN_24, EN_25, EN_26, EN_27, EN_28, EN_29, EN_30, EN_31, EN_32, EN_39, EN_35, EN_36, EN_37,};
+const char EN_41[] PROGMEM = "Rotary";
+const char *const EN_table[] PROGMEM = {EN_0, EN_1, EN_2, EN_3, EN_4, EN_5, EN_41, EN_6, EN_40, EN_7, EN_38, EN_8, EN_9, EN_10, EN_11, EN_12, EN_13, EN_14, EN_15, EN_16, EN_17, EN_18, EN_19, EN_20, EN_21, EN_22, EN_23, EN_24, EN_25, EN_26, EN_27, EN_28, EN_29, EN_30, EN_31, EN_32, EN_39, EN_35, EN_36, EN_37,};
 
 /*
   #!/usr/bin/python
@@ -288,8 +290,9 @@ const unsigned char t4f[] PROGMEM = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x1d, 
 const unsigned char t_save[] PROGMEM = { 0x02, 0xfe, 0x01, 0x00, 0x00, 0x02, 0x82, 0x3f, 0xff, 0x00, 0x04, 0x82, 0x02, 0x00, 0x00, 0x04, 0xfe, 0x02, 0x00, 0x00, 0x0c, 0x10, 0x04, 0xfc, 0x00, 0x14, 0x10, 0x04, 0x08, 0x00, 0x05, 0xff, 0x8c, 0x10, 0x00, 0x04, 0x10, 0x14, 0x10, 0x00, 0x04, 0x38, 0x25, 0xff, 0x00, 0x04, 0x34, 0x04, 0x10, 0x00, 0x04, 0x52, 0x04, 0x10, 0x00, 0x04, 0x91, 0x84, 0x10, 0x00, 0x05, 0x10, 0x04, 0x50, 0x00, 0x04, 0x10, 0x04, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 const unsigned char tAbout[] PROGMEM = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x82, 0x0f, 0xfe, 0x00, 0x00, 0x44, 0x00, 0x40, 0x00, 0x07, 0xff, 0x80, 0x40, 0x00, 0x00, 0x10, 0x00, 0x40, 0x00, 0x00, 0x10, 0x00, 0x40, 0x00, 0x00, 0x10, 0x1f, 0xff, 0x80, 0x0f, 0xff, 0xc0, 0x40, 0x00, 0x00, 0x10, 0x00, 0x40, 0x00, 0x00, 0x28, 0x00, 0x40, 0x00, 0x00, 0x28, 0x00, 0x40, 0x00, 0x00, 0x44, 0x00, 0x40, 0x00, 0x00, 0x82, 0x00, 0x40, 0x00, 0x03, 0x01, 0xc1, 0x40, 0x00, 0x0c, 0x00, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 const unsigned char tPassword[] PROGMEM = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x1f, 0x7e, 0x00, 0x1f, 0xff, 0x84, 0x02, 0x00, 0x10, 0x80, 0x84, 0x42, 0x00, 0x0a, 0x4a, 0x04, 0x42, 0x00, 0x0a, 0x31, 0x08, 0x42, 0x00, 0x12, 0xc5, 0x0f, 0x42, 0x00, 0x03, 0x04, 0x19, 0x7f, 0x00, 0x1d, 0xf8, 0x29, 0x01, 0x00, 0x00, 0x40, 0x09, 0x01, 0x00, 0x08, 0x42, 0x09, 0xfd, 0x00, 0x08, 0x42, 0x09, 0x01, 0x00, 0x08, 0x42, 0x0f, 0x01, 0x00, 0x0f, 0xfe, 0x09, 0x05, 0x00, 0x00, 0x02, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+const unsigned char t19[] PROGMEM = { 0x00, 0x08, 0x00, 0x00, 0x00, 0x02, 0x1f, 0x88, 0xfe, 0x00, 0x1f, 0xd0, 0x0e, 0x22, 0x00, 0x04, 0x20, 0x30, 0x22, 0x00, 0x04, 0x5f, 0x80, 0x22, 0x00, 0x07, 0x84, 0x9e, 0x22, 0x00, 0x04, 0x85, 0x08, 0x22, 0x00, 0x04, 0x94, 0x08, 0x22, 0x00, 0x04, 0x94, 0x28, 0xfe, 0x00, 0x04, 0x97, 0x1e, 0x42, 0x00, 0x04, 0x94, 0x08, 0x42, 0x00, 0x08, 0x94, 0x08, 0x42, 0x00, 0x0a, 0xac, 0x0a, 0x42, 0x00, 0x11, 0x44, 0x0c, 0x42, 0x00, 0x00, 0x83, 0x89, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 const unsigned char *CN_table[] = {
-  t0, t1, t2, t3, t4, t5, t7, tPassword, t6, tAbout, Back, //0
+  t0, t1, t2, t3, t4, t5, t19 , t7, tPassword, t6, tAbout, Back, //0
   t0, t1_1, t1_2, t1_3, t1_4, t_save,  //1
   t2_0, t2_1, t2_2, t_save, //2
   t2_1, t3_1, t2_2, t_save,//3
@@ -921,7 +924,7 @@ Arduboy2 arduboy;
 #define SMOOTHIE      0.05      // OpAmp output smooth factor (1=no smoothing; 0.05 default)
 #define PID_ENABLE    true      // enable PID control
 #define BEEP_ENABLE   true      // enable/disable buzzer
-#define MAINSCREEN    0         // type of main screen (0: big numbers; 1: more infos)
+#define MAINSCREEN    1         // type of main screen (0: big numbers; 1: more infos)
 
 // EEPROM identifier
 #define EEPROM_IDENT   0x081F   // to identify if EEPROM was written by this program
@@ -1003,6 +1006,8 @@ int Password = 0;
 //屏幕保护-主题：密集运算
 byte Line[4];
 
+//编码器旋转调整方向设定
+bool RotaryD = false;
 // Specify the links and initial PID tuning parameters
 PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
 
@@ -1263,7 +1268,7 @@ void beep() {
 void setRotary(int rmin, int rmax, int rstep, int rvalue) {
   countMin  = rmin << ROTARY_TYPE;
   countMax  = rmax << ROTARY_TYPE;
-  countStep = rstep;
+  if (RotaryD) countStep = rstep; else countStep = -rstep;
   count     = rvalue << ROTARY_TYPE;
 }
 
@@ -1293,8 +1298,9 @@ void getEEPROM() {
     FlipState = EEPROM.read(16);
     UnderVoltage = EEPROM.read(17);
     Password = (EEPROM.read(18) << 8) | EEPROM.read(19);
+    RotaryD = EEPROM.read(20);
     uint8_t i, j;
-    uint16_t counter = 20;
+    uint16_t counter = 21;
     for (i = 0; i < NumberOfTips; i++) {
       for (j = 0; j < TIPNAMELENGTH; j++) {
         TipName[i][j] = EEPROM.read(counter++);
@@ -1332,8 +1338,9 @@ void updateEEPROM() {
   EEPROM.update(17, UnderVoltage);
   EEPROM.update(18, Password >> 8);
   EEPROM.update(19, Password & 0xFF);
+  EEPROM.update(20, RotaryD);
   uint8_t i, j;
-  uint16_t counter = 20;
+  uint16_t counter = 21;
   for (i = 0; i < NumberOfTips; i++) {
     for (j = 0; j < TIPNAMELENGTH; j++) EEPROM.update(counter++, TipName[i][j]);
     for (j = 0; j < 4; j++) {
@@ -1378,7 +1385,7 @@ void MainScreen() {
   else SysState = 6;
   if (SysState != 1) {
     if (MainScrType) {
-      arduboy.invert(0);
+      //arduboy.invert(0);
       arduboy.clear();
       //详细信息页
       arduboy.fillRect(0, 0, 128, 64, 1); //白底
@@ -1417,10 +1424,7 @@ void MainScreen() {
       arduboy.setCursor(19, 32); arduboy.print((float)Vin / 1000, 1); arduboy.print(F("V")); //输入电压
       arduboy.setCursor(19, 40); arduboy.print(F(VERSION)); //固件
       //显示探头温度
-      arduboy.setCursor(57, 18);
-      arduboy.setTextSize(4);
-      if (ShowTemp > 500) arduboy.print(F("000")); else arduboy.print(ShowTemp);
-      arduboy.drawRect(55, 16, 72, 32, 0);
+      DrawNumRect(ShowTemp);
 
       DrawStatusBar(0);
       arduboy.display();
@@ -1432,17 +1436,21 @@ void MainScreen() {
       if (getChipTemp() > 80 && ((millis() * 4) / 1000) % 2) beep();
       if ((float)Vin / 100 < UnderVoltage && ((millis() * 4) / 1000) % 2) beep();
       arduboy.setCursor(12, 2);
-      //arduboy.fillRect(0, 0, 128, 48, 1);
-      if (ShowTemp > 500) arduboy.print(999); else arduboy.print(ShowTemp);
 
-      
-      DrawStatusBar(1);
+      if (ShowTemp > 500) arduboy.print(999); else arduboy.print(ShowTemp);
+      arduboy.fillRect(0, 48, 128, 16, 1);
+
+      DrawStatusBar(0);
       arduboy.display();
     }
   }
-
 }
-
+void DrawNumRect(int n) {
+  arduboy.setCursor(57, 18);
+  arduboy.setTextSize(4);
+  if (ShowTemp > 500) arduboy.print(F("000")); else arduboy.print(n);
+  arduboy.drawRect(55, 16, 72, 32, 0);
+}
 void DrawStatusBar(bool color) {
   SetTextColor(color);
   arduboy.setTextSize(1);
@@ -1485,7 +1493,7 @@ void SetupScreen() {
   bool repeat = true;
 
   while (repeat) {
-    arduboy.invert(0);
+    //arduboy.invert(0);
     MenuLevel = 0; //默认打开主菜单
     selection = MenuScreen(selection);
     switch (selection) {
@@ -1495,10 +1503,11 @@ void SetupScreen() {
       case 3:   MenuLevel = 4; PIDenable = MenuScreen(PIDenable); break;
       case 4:   ScreenSet(); break;
       case 5:   MenuLevel = 6; beepEnable = MenuScreen(beepEnable); break;
-      case 6:   UnderVoltageSet(); break;
-      case 7:   PasswordSet(); break;
-      case 8:   MenuLevel = 8; LANG = MenuScreen(LANG); break;
-      case 9:   QRcodeScreen(); break;
+      case 6:   RotarySet(); break;
+      case 7:   UnderVoltageSet(); break;
+      case 8:   PasswordSet(); break;
+      case 9:   MenuLevel = 8; LANG = MenuScreen(LANG); break;
+      case 10:   QRcodeScreen(); break;
       default:  repeat = false; break;
     }
   }
@@ -1508,7 +1517,57 @@ void SetupScreen() {
   setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, SetTemp);
 }
 
+void RotarySet() {
+  bool Exit = false;
+  float rad;
+  byte ExitBar = 0;
+  SetTextColor(0);
+  lastbutton = (!digitalRead(BUTTON_PIN));
+  setRotary(60, 420, 18, 240);
+  do {
+    arduboy.setTextSize(1);
+    Setpoint = getRotary();
+    ShowTemp = Setpoint;
+    rad = ((Setpoint - 60) / 360.0) * (2 * PI) - PI / 2;
 
+    arduboy.clear();
+    //仪表盘
+    arduboy.fillRect(0, 0, 128, 64, 1);
+    arduboy.fillTriangle(24 + 24 * cos(rad), 24 - 24 * sin(rad), 24 + 3 * sin(rad), 24 + 3 * cos(rad), 24 - 3 * sin(rad), 24 - 3 * cos(rad), 0);
+    arduboy.drawCircle(24, 24, 22, 0);
+    arduboy.drawCircle(24, 24, 19, 0);
+    arduboy.drawCircle(24, 24, 3, 0);
+    //右上角的模式提示文本
+    arduboy.setCursor(55, 1);
+    arduboy.setTextSize(2);
+    arduboy.print(F("MODE "));
+    if (RotaryD) arduboy.print(F("+")); else arduboy.print(F("-"));
+    //右侧数字显示
+    DrawNumRect(ShowTemp);
+    //下端的状态条
+    DrawStatusBar(0);
+    //退出条
+    arduboy.fillRect(0, 0, ExitBar, 4, 0);
+
+    arduboy.display();
+
+
+    CheckLastButton();
+    if (!digitalRead(BUTTON_PIN) && !lastbutton) {
+
+      ExitBar += 8;
+      if (ExitBar > 127) Exit = true;
+    } else {
+      if (ExitBar > 1 && ExitBar < 64) {
+        RotaryD = !RotaryD;
+        setRotary(60, 420, 18, 240);
+      }
+      ExitBar = 0;
+    }
+
+  } while (!Exit);
+
+}
 //显示设置菜单
 // tip settings screen
 void ScreenSet() {
@@ -1555,11 +1614,11 @@ void TempScreen() {
     selection = MenuScreen(selection);
     switch (selection) {
       case 0:   setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, DefaultTemp);
-        DefaultTemp = InputScreen(17); break;
+        DefaultTemp = InputScreen(18); break;
       case 1:   setRotary(20, 200, TEMP_STEP, SleepTemp);
-        SleepTemp = InputScreen(18); break;
+        SleepTemp = InputScreen(19); break;
       case 2:   setRotary(10, 100, TEMP_STEP, BoostTemp);
-        BoostTemp = InputScreen(19); break;
+        BoostTemp = InputScreen(20); break;
       default:  repeat = false; break;
     }
   }
@@ -1575,11 +1634,11 @@ void TimerScreen() {
     selection = MenuScreen(selection);
     switch (selection) {
       case 0:   setRotary(0, 30, 1, time2sleep);
-        time2sleep = InputScreen(21); break;
+        time2sleep = InputScreen(22); break;
       case 1:   setRotary(0, 60, 5, time2off);
-        time2off = InputScreen(22); break;
+        time2off = InputScreen(23); break;
       case 2:   setRotary(0, 180, 10, timeOfBoost);
-        timeOfBoost = InputScreen(23); break;
+        timeOfBoost = InputScreen(24); break;
       default:  repeat = false; break;
     }
   }
@@ -1771,12 +1830,12 @@ void QRcodeScreen() {
 // information display screen
 void UnderVoltageSet() {
   setRotary(0, 250, 1, UnderVoltage);
-  UnderVoltage = InputScreen(6);
+  UnderVoltage = InputScreen(7);
   beep();
 }
 //设置开机密码
 void PasswordSet() {
-  Password = InputBigNum(Password, 7);
+  Password = InputBigNum(Password, 8);
   beep();
 }
 
@@ -1784,12 +1843,12 @@ void BootPassword() {
   if (Password != 0) {
     do {
       arduboy.clear();
-      DrawApp(40, 7);
-      DrawAppText(7);
+      DrawApp(40, 8);
+      DrawAppText(8);
       arduboy.display();
       delay(1000);
       beep(); beep(); beep();
-    } while (InputBigNum(0, 7) != Password);
+    } while (InputBigNum(0, 8) != Password);
   }
 }
 //更换预设界面
