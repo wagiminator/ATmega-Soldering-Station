@@ -1528,7 +1528,7 @@ void RotarySet() {
     arduboy.setTextSize(1);
     Setpoint = getRotary();
     ShowTemp = Setpoint;
-    rad = ((Setpoint - 60) / 360.0) * (2 * PI) - PI / 2;
+
 
     arduboy.clear();
     //仪表盘
@@ -1541,7 +1541,13 @@ void RotarySet() {
     arduboy.setCursor(55, 1);
     arduboy.setTextSize(2);
     arduboy.print(F("MODE "));
-    if (RotaryD) arduboy.print(F("+")); else arduboy.print(F("-"));
+    if (RotaryD) {
+      arduboy.print(F("-"));
+      rad = ((Setpoint - 60) / 360.0) * (2 * PI) - PI / 2;
+    } else {
+      arduboy.print(F("+"));
+      rad = ((-Setpoint - 60) / 360.0) * (2 * PI) + PI * 1 / 6;
+    }
     //右侧数字显示
     DrawNumRect(ShowTemp);
     //下端的状态条
