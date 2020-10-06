@@ -19,7 +19,7 @@
 // SolderingStation2
 //
 // ATmega328-controlled Soldering Station for Hakko T12 Tips.
-// 此v1.8t1版本功能简介
+// 此v1.8t3版本功能简介
 // This 1.8t1 version of the code implements:
 // - 烙铁头温度实时监测
 // - Temperature measurement of the tip
@@ -63,6 +63,8 @@
 // - Built in English, Chinese and Japanese language pack
 // - 开机密码设置
 // - System Password
+// - 允许设置旋钮方向
+// - 内嵌看门狗，宕机自动重启
 
 // Power supply should be in the range of 16V/2A to 24V/3A and well
 // stabilized.
@@ -1030,12 +1032,23 @@ void Flip(bool Fmode) {
   arduboy.flipVertical(Fmode);
   arduboy.flipHorizontal(Fmode);
 }
+
+ISR(WDT_vect)  //WDT中断，8秒一次
+{
+  WDTCSR |= _BV(WDIE);
+}
+
 void setup() {
+  //设置看门狗自动复位
+  SetWDT();
+  //启动arduboy
   arduboy.begin();
   arduboy.setFrameRate(30);
 
   //Serial.begin(115200);
   // set the pin modes
+
+  //设置IO
   pinMode(SENSOR_PIN,   INPUT);
   pinMode(VIN_PIN,      INPUT);
   pinMode(BUZZER_PIN,   OUTPUT);
@@ -1048,12 +1061,12 @@ void setup() {
   analogWrite(CONTROL_PIN, 255);        // this shuts off the heater
   digitalWrite(BUZZER_PIN, LOW);        // must be LOW when buzzer not in use
 
-  // setup ADC
+  // setup ADC  初始化ADC
   ADCSRA |= bit (ADPS0) | bit (ADPS1) | bit (ADPS2);  // set ADC prescaler to 128
   ADCSRA |= bit (ADIE);                 // enable ADC interrupt
   interrupts ();                        // enable global interrupts
 
-  // setup pin change interrupt for rotary encoder
+  // setup pin change interrupt for rotary encoder 初始化编码器IO
   PCMSK0 = bit (PCINT0);                // Configure pin change interrupt on Pin8
   PCICR  = bit (PCIE0);                 // Enable pin change interrupt
   PCIFR  = bit (PCIF0);                 // Clear interrupt flag
@@ -1431,7 +1444,7 @@ void MainScreen() {
         arduboy.setCursor(19, 32); arduboy.print((float)Vin / 1000, 1); arduboy.print(F("V")); //输入电压
         arduboy.drawSlowXYBitmap(2, 34, Lightning, 14, 14, 0);
       }
-      
+
 
       //R3
 
@@ -2132,6 +2145,22 @@ void drawSlowXYBitmapResize(int x, int y, const uint8_t *bitmap, uint8_t w, uint
     }
   }
 }
+
+//设置看门狗模式-中断+复位
+void SetWDT() {
+  byte bb;
+  bb = 7 & 7;
+  bb |= (1 << WDCE);
+  
+  __asm__ __volatile__ ("wdr");       //看门狗复位
+  MCUSR &= ~(1 << WDRF);              //MUUSR中的WDRF清零，清除复位标志
+  WDTCSR |= (1 << WDCE) | (1 << WDE); //打开允许修改使能，并WDE置1
+  //设置新的看门狗超时值bb
+  WDTCSR = bb;
+  WDTCSR |= _BV(WDIE);                //设置中断模式
+  WDTCSR |= _BV(WDE);                 //设置复位模式
+}
+
 /*
   8x8 dot Japanese font for Arduboy
 
