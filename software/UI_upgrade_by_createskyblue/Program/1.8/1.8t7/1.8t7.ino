@@ -162,7 +162,7 @@ bool      BeepEnable  = BEEP_ENABLE;
 #define TempP3 -0.0033245713
 #define TempP4 0.0000045338
 float    PTemp[4] = {TempP1, TempP2, TempP3, TempP4}; //温度拟合系数
-const uint16_t CalTemp[9] = {50,100,150,200,250,300,350,400,450};
+const uint16_t CalTemp[9] = {50, 100, 150, 200, 250, 300, 350, 400, 450};
 char      TipName[TIPNAMELENGTH] = {TIPNAME};
 uint8_t   CurrentTip   = 0;
 uint8_t   NumberOfTips = 1;
@@ -218,7 +218,7 @@ byte Line[4];
 bool RotaryD = false;
 
 //开机非线性动画
-byte BootAnimationY=64;
+byte BootAnimationY = 64;
 
 // Specify the links and initial PID tuning parameters
 PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
@@ -283,7 +283,7 @@ void setup() {
 
   //设置屏幕亮度
   SetOLEDLightLevel(32); //降低屏幕亮度 延长OLED使用寿命
-  
+
   //初始化屏幕保护动画
   for (byte a = 0; a < 4; a++) Line[a] = 32 * a;
 
@@ -311,7 +311,7 @@ void setup() {
   setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, DefaultTemp);
   // reset sleep timer
   Sleepmillis = millis();
-  
+
   // long beep for setup completion
   beep(); beep();
   ShowVersion();

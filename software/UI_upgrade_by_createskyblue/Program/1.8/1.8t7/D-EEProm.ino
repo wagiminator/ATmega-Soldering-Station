@@ -1,3 +1,60 @@
+/*EEPROM可用性检查
+  作用：防止因为EEPROM损坏而载入了错误的运行参数导致参数生产安全事故
+*/
+void CheckEEPROM() {
+  byte w, r;
+  int pass = 0, fail = 0;
+  for (int i = 0; i < EEPROM.length(); i++) {
+    //内存测试程序
+    w = random(0, 255);
+    EEPROM[i] = w;
+    r = EEPROM[i];
+    if (w == r) pass++; else fail++;
+
+    //显示测试数据
+    arduboy.clear();
+    arduboy.setTextSize(2);
+    SetTextColor(0);
+    arduboy.setCursor(0, 0);
+    arduboy.print(F(" MEM CHECK "));
+
+    arduboy.setTextSize(1);
+    arduboy.setCursor(8, 40);
+    arduboy.print(i); arduboy.print(F("/")); arduboy.print(EEPROM.length());
+    SetTextColor(1);
+    arduboy.setCursor(0 + 8, 24); arduboy.print(F("PASS-")); arduboy.print(pass);
+    arduboy.setCursor(64 + 8, 24); arduboy.print(F("FAIL-")); arduboy.print(fail);
+
+    arduboy.setCursor(0 + 8, 32); arduboy.print(F("W -> ")); arduboy.print(w);
+    arduboy.setCursor(64 + 8, 32); arduboy.print(F("R -> ")); arduboy.print(r);
+
+
+    //进度标
+    arduboy.setCursor(map(i, 0, EEPROM.length(), 0, 92), 52);
+    arduboy.print(((float)i / EEPROM.length())*100); arduboy.print(F("%"));
+    //进度条
+    arduboy.fillRect(0, 60, map(i, 0, EEPROM.length(), 0, 127), 4, 1);
+    arduboy.display();
+  }
+  //EEPROM存储器可用性检查失败
+  while (fail == 0) {
+    arduboy.clear();
+    arduboy.setTextSize(2);
+    SetTextColor(1);
+    arduboy.setCursor(22, 16);
+    arduboy.print(F("DAMAGED"));
+    arduboy.setTextSize(1);
+    arduboy.setCursor(31, 44);
+    SetTextColor(0);
+    if (millis() / 1000 % 2 == 0)arduboy.print(F("BOOT FAILED"));
+    arduboy.display();
+  }
+
+}
+
+/*查看EEPROM内存
+   通过板载的旋转编码器可以上下滚动翻阅EEPROM中的数据
+*/
 void ViewEEPRom() {
   setRotary(0, 1023, 16, 0);
   lastbutton = (!digitalRead(BUTTON_PIN));
@@ -98,6 +155,7 @@ void GetEEPROM() {
     RotaryD = EEPROM.read(20);
   }
   else {
+    CheckEEPROM();
     EEPROM.update(0, EEPROM_IDENT >> 8); EEPROM.update(1, EEPROM_IDENT & 0xFF);
     UpdateEEPROM();
   }
