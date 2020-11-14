@@ -536,14 +536,15 @@ void CalibrationScreen() {
       SetTemp = getRotary();
       Thermostat(1);       //加热控制 - ADC数值为基准
 
-      arduboy.setCursor(8, 0);
-      arduboy.print(F("Cal   ADC-> "));
+      arduboy.setCursor(25, 0);
+      SetTextColor(0);
+      arduboy.print(F("ADC-> "));
       arduboy.print(RawTemp);
-
+      SetTextColor(1);
       for (byte y = 0; y < 5; y++) {
         for (byte x = 0; x < 2; x++) {
           if (2 * y + x > CalStep) break;
-          arduboy.setCursor(x * 64 + 4, y * 8 + 16);
+          arduboy.setCursor(x * 64 + 10, y * 8 + 16);
           arduboy.print(CalTemp[2 * y + x]);
           arduboy.print(F(" - "));
           if (2 * y + x == CalStep) arduboy.print(getRotary());
@@ -579,14 +580,21 @@ void CalibrationScreen() {
     }
   } else {
     arduboy.clear();
-    arduboy.setCursor(0, 24); arduboy.print(F("ERROR"));
+    arduboy.setTextSize(2);
+    SetTextColor(0);
+    arduboy.setCursor(32, 24);
+    arduboy.print(F("Error"));
     arduboy.display();
     delay(5000);
+    resetFunc();
   }
   arduboy.clear();
-  arduboy.print(F("Reboot..."));
+  arduboy.setTextSize(2);
+  SetTextColor(0);
+  arduboy.setCursor(28, 24);
+  arduboy.print(F("Reboot"));
   arduboy.display();
-  delay(500);
+  delay(5000);
   resetFunc();
 }
 //显示默认烙铁头温度曲线系数
@@ -606,14 +614,14 @@ void ShowPTemp(float *p) {
   lastbutton = (!digitalRead(BUTTON_PIN));
   while (digitalRead(BUTTON_PIN) || lastbutton) CheckLastButton();
   /*
-  lastbutton = (!digitalRead(BUTTON_PIN));
-  setRotary(50, 450, 1, 0);
-  do {
+    lastbutton = (!digitalRead(BUTTON_PIN));
+    setRotary(50, 450, 1, 0);
+    do {
     arduboy.clear();
     for (int y = 0; y < 64; y++) arduboy.drawPixel(map(calculateTemp(map(y, 0, 63, 0, 400)), CalTemp[0], CalTemp[8], 0, 127), y,1);
     arduboy.display();
     CheckLastButton();
-  } while (digitalRead(BUTTON_PIN) || lastbutton);*/
+    } while (digitalRead(BUTTON_PIN) || lastbutton);*/
 }
 //命名界面 文本输入界面
 // input tip name screen
@@ -655,7 +663,13 @@ void InputNameScreen() {
 void DeleteTipScreen() {
   MenuLevel = 7;
   if (NumberOfTips == 1) {
-    //MessageScreen(DeleteMessage, sizeof(DeleteMessage));
+    arduboy.clear();
+    arduboy.setTextSize(2);
+    SetTextColor(0);
+    arduboy.setCursor(16, 24);
+    arduboy.print(F("Only one"));
+    arduboy.display();
+    delay(1000);
   }
   else if (MenuScreen(0)) {
     if (CurrentTip == (NumberOfTips - 1)) {
@@ -677,8 +691,16 @@ void AddTipScreen() {
     PTemp[1] = TempP2;
     PTemp[2] = TempP3;
     PTemp[3] = TempP4;
+    UpdateEEPROM();
+  } else {
+    arduboy.clear();
+    SetTextColor(0);
+    arduboy.setCursor(5, 24);
+    arduboy.print(F("Out of Mem"));
+    arduboy.display();
+    delay(1000);
   }
-  UpdateEEPROM();
+
 }
 
 int InputBigNum(int InputPW, byte appID) {
@@ -721,8 +743,15 @@ void Flip(bool Fmode) {
 //展示版本号
 void ShowVersion() {
   arduboy.clear();
-  arduboy.setCursor(43, 28);
+  arduboy.setTextSize(2);
+  arduboy.setCursor(28, 24);
   arduboy.print(F(VERSION));
   arduboy.display();
-  delay(1000);
+  delay(700);
+  arduboy.clear();
+  SetTextColor(0);
+  arduboy.setCursor(28, 24);
+  arduboy.print(F(VERSION));
+  arduboy.display();
+  delay(300);
 }

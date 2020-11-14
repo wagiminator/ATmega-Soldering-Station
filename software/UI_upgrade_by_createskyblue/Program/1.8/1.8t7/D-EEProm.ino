@@ -6,12 +6,12 @@ void ViewEEPRom() {
     arduboy.clear();
     for (byte y = 0; y < 8; y++) {
       for (byte x = 0; x < 2; x++) {
-        if (2 * y + x > 1024) break;
+        if (2 * y + x + getRotary() > 1024) break;
         arduboy.setCursor(x * 64, y * 8);
         arduboy.print(2 * y + x + getRotary());
         arduboy.print(F("->"));
         arduboy.print(EEPROM[2 * y + x + getRotary()]);
-        arduboy.setCursor(x * 64 + 48, y * 8);
+        arduboy.setCursor(x * 64 + 54, y * 8);
         arduboy.print((char)EEPROM[2 * y + x + getRotary()]);
       }
     }
