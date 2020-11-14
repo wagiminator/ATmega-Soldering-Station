@@ -1,4 +1,4 @@
-
+void(* resetFunc) (void) = 0;
 // reads current rotary encoder value
 int getRotary() {
   return (Count >> ROTARY_TYPE);
@@ -110,8 +110,8 @@ ISR (PCINT0_vect) {
 
 //计算实际温度
 // calculates real temperature value according to ADC reading and calibration values
-void calculateTemp() {
-  CurrentTemp =  PTemp[0] + RawTemp * PTemp[1] + RawTemp * RawTemp * PTemp[2] + RawTemp * RawTemp * RawTemp * PTemp[3];
+float calculateTemp(float t) {
+  return PTemp[0] + RawTemp * PTemp[1] + RawTemp * RawTemp * PTemp[2] + RawTemp * RawTemp * RawTemp * PTemp[3];
 }
 
 /*
@@ -200,7 +200,7 @@ void SENSORCheck() {
 
 
   RawTemp += (temp - RawTemp) * SMOOTHIE;     // stabilize ADC temperature reading
-  calculateTemp();
+  CurrentTemp = calculateTemp(RawTemp);
 
   // stabilize displayed temperature when around setpoint
   if ((ShowTemp != Setpoint) || (abs(ShowTemp - CurrentTemp) > 5)) ShowTemp = CurrentTemp;

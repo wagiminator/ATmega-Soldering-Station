@@ -259,7 +259,7 @@ void TipScreen() {
       default:  repeat = false;      break;
     }
   }
-  //ViewEEPRom();
+  ViewEEPRom();
 }
 
 //温控设置菜单
@@ -502,7 +502,7 @@ void ChangeTipScreen() {
     for (uint8_t i = 0; i < 3; i++) {
       uint8_t drawnumber = selected + i - arrow;
       if (drawnumber < NumberOfTips) {
-        arduboy.setCursor(12, 16 * (i + 1)); 
+        arduboy.setCursor(12, 16 * (i + 1));
         GetEEPRomTip(selected + i - arrow);
         arduboy.print(TipName);
       }
@@ -569,7 +569,6 @@ void CalibrationScreen() {
   for (int i = 0; i < 8; i++) if (xx[i] + 5 >= xx[i + 1]) pass = false;
   if (pass) {
     MenuLevel = 7;
-    free(&pass);
     polyfit(9, xx, CalTemp, 3, P); //拟合程序
     free(xx);
     ShowPTemp(&P[0]);
@@ -584,6 +583,11 @@ void CalibrationScreen() {
     arduboy.display();
     delay(5000);
   }
+  arduboy.clear();
+  arduboy.print(F("Reboot..."));
+  arduboy.display();
+  delay(500);
+  resetFunc();
 }
 //显示默认烙铁头温度曲线系数
 void ShowPTemp(float *p) {
@@ -598,9 +602,18 @@ void ShowPTemp(float *p) {
     p++;
   }
   arduboy.display();
+
   lastbutton = (!digitalRead(BUTTON_PIN));
   while (digitalRead(BUTTON_PIN) || lastbutton) CheckLastButton();
-
+  /*
+  lastbutton = (!digitalRead(BUTTON_PIN));
+  setRotary(50, 450, 1, 0);
+  do {
+    arduboy.clear();
+    for (int y = 0; y < 64; y++) arduboy.drawPixel(map(calculateTemp(map(y, 0, 63, 0, 400)), CalTemp[0], CalTemp[8], 0, 127), y,1);
+    arduboy.display();
+    CheckLastButton();
+  } while (digitalRead(BUTTON_PIN) || lastbutton);*/
 }
 //命名界面 文本输入界面
 // input tip name screen
@@ -630,13 +643,14 @@ void InputNameScreen() {
       arduboy.display();
     } while (digitalRead(BUTTON_PIN) || lastbutton);
     TipName[digit] = value;
+    UpdateEEPROM();
     beep(); delay (10);
   }
   TipName[TIPNAMELENGTH - 1] = 0;
   return value;
 }
 
-
+//删除烙铁头
 // delete tip screen
 void DeleteTipScreen() {
   MenuLevel = 7;

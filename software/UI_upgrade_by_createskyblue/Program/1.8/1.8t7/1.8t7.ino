@@ -162,7 +162,7 @@ bool      BeepEnable  = BEEP_ENABLE;
 #define TempP3 -0.0033245713
 #define TempP4 0.0000045338
 float    PTemp[4] = {TempP1, TempP2, TempP3, TempP4}; //温度拟合系数
-const uint16_t  CalTemp[9] = {50,100,150,200,250,300,350,400,450};
+const uint16_t CalTemp[9] = {50,100,150,200,250,300,350,400,450};
 char      TipName[TIPNAMELENGTH] = {TIPNAME};
 uint8_t   CurrentTip   = 0;
 uint8_t   NumberOfTips = 1;
@@ -295,7 +295,7 @@ void setup() {
   SetTemp  = DefaultTemp;
   RawTemp  = denoiseAnalog(SENSOR_PIN);
   ChipTemp = getChipTemp();
-  calculateTemp();
+  CurrentTemp = calculateTemp(RawTemp);
   // turn on heater if iron temperature is well below setpoint
 #if UsePMOS
   if ((CurrentTemp + 20) < DefaultTemp) analogWrite(CONTROL_PIN, 255);
