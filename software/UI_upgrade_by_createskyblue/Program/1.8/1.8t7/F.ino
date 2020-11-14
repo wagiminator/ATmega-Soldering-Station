@@ -74,8 +74,15 @@ uint16_t getVCC() {
 // get supply voltage in mV
 uint16_t getVIN() {
   long result;
-  result = denoiseAnalog (VIN_PIN);     // read supply voltage via voltage divider
-  return (result * Vcc / 179.474);      // 179.474 = 1023 * R13 / (R12 + R13)
+  result = denoiseAnalog (VIN_PIN); {
+    if      (result < 540) return (result * Vcc / 184.416 + 86.987);
+    else if (result < 660) return (result * Vcc / 173.204 - 878.29);
+    else if (result < 745) return (result * Vcc / 143.579 - 4875);
+    else if (result < 781) return (result * Vcc / 119.109 - 10260);
+    else if (result < 800) return (result * Vcc / 86.178 - 23013);
+    else                   return (result * Vcc / 86.178 - 23113);
+  }    // read supply voltage via voltage divider
+  //return (result * Vcc / 179.474);      // 179.474 = 1023 * R13 / (R12 + R13)
 }
 
 //ADC中断服务
