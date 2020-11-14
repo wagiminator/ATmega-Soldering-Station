@@ -37,7 +37,7 @@ void CheckEEPROM() {
     arduboy.display();
   }
   //EEPROM存储器可用性检查失败
-  while (fail == 0) {
+  while (fail != 0) {
     arduboy.clear();
     arduboy.setTextSize(2);
     SetTextColor(1);
