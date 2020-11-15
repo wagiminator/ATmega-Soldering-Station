@@ -29,7 +29,8 @@ T12 Quick Heating Soldering Station featuring
 - Storing user settings into the EEPROM
 - 允许热插拔烙铁头，并弹出烙铁头配置选择菜单
 - Tip change detection
-=========UI upgraded version =========
+
+##=========UI upgraded version =========
 
 
 - 芯片过热以及低电压报警
@@ -90,28 +91,28 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/1.jpg)
 
-###Default control interface
+##Default control interface
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/2.jpg)
 
-###EEPROM availability check
+##EEPROM availability check
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/3.jpg)
 
-###Tip menu
+##Tip menu
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/4.jpg)
 
-###9 segments of temperature curve fitting
-###Soldering tip calibration page
+##9 segments of temperature curve fitting
+##Soldering tip calibration page
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/5.jpg)
 
-###Temperature calibration coefficient
+##Temperature calibration coefficient
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/6.jpg)
 
-###Encoder direction regulation
+##Encoder direction regulation
 
 Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 	
