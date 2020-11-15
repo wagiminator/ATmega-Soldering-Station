@@ -19,8 +19,8 @@
 // SolderingStation2
 //
 // ATmega328-controlled Soldering Station for Hakko T12 Tips.
-// 此v1.8t3版本功能简介
-// This 1.8t3 version of the code implements:
+// 此v1.8t4版本功能简介
+// This 1.8t4 version of the code implements:
 // - 烙铁头温度实时监测
 // - Temperature measurement of the tip
 // - PID温度控制
@@ -892,7 +892,7 @@ Arduboy2 arduboy;
 #include <avr/sleep.h>
 
 // Firmware version
-#define VERSION       "v1.8t3"
+#define VERSION       "v1.8t4"
 
 // Type of rotary encoder
 #define ROTARY_TYPE   1         // 0: 2 increments/step; 1: 4 increments/step
@@ -1019,10 +1019,12 @@ byte Line[4];
 
 //编码器旋转调整方向设定
 bool RotaryD = false;
+
 // Specify the links and initial PID tuning parameters
 PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
 
-
+//NMOS - PMOS软件切换
+#define UsePMOS false
 
 //LANG 语言支持
 /*  0 - 中文 CHINESE
@@ -1059,8 +1061,11 @@ void setup() {
   pinMode(ROTARY_2_PIN, INPUT_PULLUP);
   pinMode(BUTTON_PIN,   INPUT_PULLUP);
   pinMode(SWITCH_PIN,   INPUT_PULLUP);
-
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 0);
+#else
   analogWrite(CONTROL_PIN, 255);        // this shuts off the heater
+#endif
   digitalWrite(BUZZER_PIN, LOW);        // must be LOW when buzzer not in use
 
   // setup ADC  初始化ADC
@@ -1093,7 +1098,12 @@ void setup() {
   calculateTemp();
 
   // turn on heater if iron temperature is well below setpoint
+#if UsePMOS
+  if ((CurrentTemp + 20) < DefaultTemp) analogWrite(CONTROL_PIN, 255);
+#else
   if ((CurrentTemp + 20) < DefaultTemp) analogWrite(CONTROL_PIN, 0);
+#endif
+
 
   // tell the PID to range between 0 and the full window size
   ctrl.SetOutputLimits(0, 255);
@@ -1164,7 +1174,15 @@ void SLEEPCheck() {
   if (handleMoved) {                    // if handle was moved
     if (inSleepMode) {                  // in sleep or off mode?
       if ((CurrentTemp + 20) < SetTemp) // if temp is well below setpoint
-        analogWrite(CONTROL_PIN, 0);    // then start the heater right now
+
+        // then start the heater right now
+
+#if UsePMOS
+        analogWrite(CONTROL_PIN, 255);
+#else
+        analogWrite(CONTROL_PIN, 0);
+#endif
+
       beep();                           // beep on wake-up
       beepIfWorky = true;               // beep again when working temperature is reached
     }
@@ -1189,7 +1207,12 @@ void SLEEPCheck() {
 
 // reads temperature, vibration switch and supply voltages
 void SENSORCheck() {
-  analogWrite(CONTROL_PIN, 255);              // shut off heater in order to measure temperature
+  // shut off heater in order to measure temperature
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 0);
+#else
+  analogWrite(CONTROL_PIN, 255);
+#endif
   delayMicroseconds(time2settle);             // wait for voltage to settle
 
   uint16_t temp = denoiseAnalog(SENSOR_PIN);  // read ADC value for temperature
@@ -1200,7 +1223,14 @@ void SENSORCheck() {
   }
   if (! SensorCounter--) Vin = getVIN();      // get Vin every now and then
 
-  analogWrite(CONTROL_PIN, Output);           // turn on again heater
+  // turn on again heater
+
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 255 - Output);
+#else
+  analogWrite(CONTROL_PIN, Output);
+#endif
+
 
   RawTemp += (temp - RawTemp) * SMOOTHIE;     // stabilize ADC temperature reading
   calculateTemp();
@@ -1214,12 +1244,19 @@ void SENSORCheck() {
     if (!isWorky && beepIfWorky) beep();
     isWorky = true;
     beepIfWorky = false;
+  } else {
+    isWorky = false;
+    beepIfWorky = true;
   }
-  else isWorky = false;
   // checks if tip is present or currently inserted
   if (ShowTemp > 500) TipIsPresent = false;   // tip removed ?
   if (!TipIsPresent && (ShowTemp < 500)) {    // new tip inserted ?
-    analogWrite(CONTROL_PIN, 255);            // shut off heater
+    //关闭加热
+#if UsePMOS
+    analogWrite(CONTROL_PIN, 0);
+#else
+    analogWrite(CONTROL_PIN, 255);
+#endif
     beep();                                   // beep for info
     TipIsPresent = true;                      // tip is present now
     ChangeTipScreen();                        // show tip selection screen
@@ -1259,7 +1296,12 @@ void Thermostat() {
     // turn on heater if current temperature is below setpoint
     if ((CurrentTemp + 0.5) < Setpoint) Output = 0; else Output = 255;
   }
-  analogWrite(CONTROL_PIN, Output);     // set heater PWM
+  // set heater PWM
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 255 - Output);
+#else
+  analogWrite(CONTROL_PIN, Output);
+#endif
 }
 
 
@@ -1518,7 +1560,12 @@ void SetTextColor(bool color) {
 }
 // setup screen
 void SetupScreen() {
-  analogWrite(CONTROL_PIN, 255);      // shut off heater
+  //关闭加热
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 0);
+#else
+  analogWrite(CONTROL_PIN, 255);
+#endif
   beep();
   uint16_t SaveSetTemp = SetTemp;
   uint8_t selection = 0;
@@ -1561,7 +1608,6 @@ void RotarySet() {
     Setpoint = getRotary();
     ShowTemp = Setpoint;
 
-
     arduboy.clear();
     //仪表盘
     arduboy.fillRect(0, 0, 128, 64, 1);
@@ -1586,13 +1632,9 @@ void RotarySet() {
     DrawStatusBar(0);
     //退出条
     arduboy.fillRect(0, 0, ExitBar, 4, 0);
-
     arduboy.display();
-
-
     CheckLastButton();
     if (!digitalRead(BUTTON_PIN) && !lastbutton) {
-
       ExitBar += 8;
       if (ExitBar > 127) Exit = true;
     } else {
@@ -1604,7 +1646,7 @@ void RotarySet() {
     }
 
   } while (!Exit);
-
+  beep(); beep();
 }
 //显示设置菜单
 // tip settings screen
@@ -1783,7 +1825,12 @@ byte QueryMenuObject() {
 */
 //FP 密集运算屏保
 void DrawIntensiveComputing() {
-  analogWrite(CONTROL_PIN, 255); //关闭MOS管
+  //关闭加热
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 0);
+#else
+  analogWrite(CONTROL_PIN, 255);
+#endif
   float calculate;
   // while (1) {
   arduboy.clear();
@@ -1955,7 +2002,12 @@ void CalibrationScreen() {
     beep(); delay (10);
   }
 
-  analogWrite(CONTROL_PIN, 255);              // shut off heater
+  //关闭加热
+#if UsePMOS
+  analogWrite(CONTROL_PIN, 0);
+#else
+  analogWrite(CONTROL_PIN, 255);
+#endif
   delayMicroseconds(time2settle);             // wait for voltage to settle
   CalTempNew[3] = getChipTemp();              // read chip temperature
   if ((CalTempNew[0] + 30 < CalTempNew[1]) && (CalTempNew[1] + 30 < CalTempNew[2])) {
@@ -2153,7 +2205,7 @@ void SetWDT() {
   byte bb;
   bb = 7 & 7;
   bb |= (1 << WDCE);
-  
+
   __asm__ __volatile__ ("wdr");       //看门狗复位
   MCUSR &= ~(1 << WDRF);              //MUUSR中的WDRF清零，清除复位标志
   WDTCSR |= (1 << WDCE) | (1 << WDE); //打开允许修改使能，并WDE置1

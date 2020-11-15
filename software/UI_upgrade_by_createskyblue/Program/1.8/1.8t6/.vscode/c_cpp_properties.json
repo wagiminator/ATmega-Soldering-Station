@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "D:/Program Files (x86)/Arduino/libraries",
+                "D:/Program Files (x86)/Arduino/hardware/arduino/avr/**",
+                "D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include",
+                "D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/7.3.0/include",
+                "D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/7.3.0/include-fixed",
+                "D:/Program Files (x86)/Arduino/tools/**",
+                "D:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "D:\\Program Files (x86)\\Arduino\\tools\\**"
+            ],
+            "forcedInclude": [
+                "D:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "intelliSenseMode": "msvc-x64",
+            "compilerPath": "D:\\mingw64\\bin\\gcc.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}
