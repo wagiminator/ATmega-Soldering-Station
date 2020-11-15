@@ -30,7 +30,7 @@ T12 Quick Heating Soldering Station featuring
 - 允许热插拔烙铁头，并弹出烙铁头配置选择菜单
 - Tip change detection
 
-##=========UI upgraded version =========
+## =========UI upgraded version =========
 
 
 - 芯片过热以及低电压报警
@@ -52,7 +52,7 @@ T12 Quick Heating Soldering Station featuring
 - 内嵌看门狗，宕机自动重启
 - Watchdog timer automatic reset the MCU
 
-V1.8t7 New features:
+## V1.8t7 New features:
 
 -EEPROM可用性检查机制
 -EEPROM availability check
@@ -82,37 +82,37 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 ![IMG_20200621_132138_x2.jpg](https://image.easyeda.com/pullimage/8LPUnbOCw2uFf1ozHYkTESbvH1LjlA1zKstsrS5v.jpeg)
 ![IMG_20200621_121350_x.jpg](https://image.easyeda.com/pullimage/5ZW6mQs1im9htCg3NJSryApeGUiSlwTFXnvxJSLq.jpeg)
 
-## Soldering Station v2.6:
+### Soldering Station v2.6:
 
 ![IMG_20200816_141230_x.jpg](https://image.easyeda.com/pullimage/B0Crwq4ZAkTLbKYQlWMz32sMSgKbYp6pCCGzzExT.jpeg)
 ![IMG_20200816_130923_x.jpg](https://image.easyeda.com/pullimage/BpBMLRUhObBq2KgvY0ECxCkv6uOqRW2V4trbMem0.jpeg)
 
-## UI-V1.8t6 UI Upgrade by createskyblue & lihaoyun6
+### UI-V1.8t6 UI Upgrade by createskyblue & lihaoyun6
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/1.jpg)
 
-##Default control interface
+### Default control interface
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/2.jpg)
 
-##EEPROM availability check
+### EEPROM availability check
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/3.jpg)
 
-##Tip menu
+### Tip menu
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/4.jpg)
 
-##9 segments of temperature curve fitting
-##Soldering tip calibration page
+### 9 segments of temperature curve fitting
+### Soldering tip calibration page
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/5.jpg)
 
-##Temperature calibration coefficient
+### Temperature calibration coefficient
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/6.jpg)
 
-##Encoder direction regulation
+### Encoder direction regulation
 
 Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 	
