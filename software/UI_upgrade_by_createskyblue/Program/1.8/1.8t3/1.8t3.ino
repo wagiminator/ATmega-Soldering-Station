@@ -20,7 +20,7 @@
 //
 // ATmega328-controlled Soldering Station for Hakko T12 Tips.
 // 此v1.8t3版本功能简介
-// This 1.8t3 version of the code implements:
+// This 1.8t1 version of the code implements:
 // - 烙铁头温度实时监测
 // - Temperature measurement of the tip
 // - PID温度控制
@@ -64,9 +64,7 @@
 // - 开机密码设置
 // - System Password
 // - 允许设置旋钮方向
-// - Knob direction setting menu
 // - 内嵌看门狗，宕机自动重启
-// - Watchdog timer automatic reset the MCU
 
 // Power supply should be in the range of 16V/2A to 24V/3A and well
 // stabilized.
