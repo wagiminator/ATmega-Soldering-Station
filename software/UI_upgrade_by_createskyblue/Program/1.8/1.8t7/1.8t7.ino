@@ -113,12 +113,12 @@ Arduboy2 arduboy;
 #define TEMP_DEFAULT  320       // default start setpoint
 #define TEMP_SLEEP    150       // temperature in sleep mode
 #define TEMP_BOOST     60       // temperature increase in boost mode
-#define TEMP_STEP      10       // rotary encoder temp change steps
+#define TEMP_STEP      5       // rotary encoder temp change steps
 
 // Default tip temperature calibration values
 #define TEMPCHP       30        // chip temperature while calibration
 #define TIPMAX        30         // max number of tips
-#define TIPNAMELENGTH 6         // max length of tip names (including termination)
+#define TIPNAMELENGTH 7         // max length of tip names (including termination)
 #define TIPNAME       "SZtip"   // default tip name
 
 
@@ -135,7 +135,7 @@ Arduboy2 arduboy;
 #define MAINSCREEN    1         // type of main screen (0: big numbers; 1: more infos)
 
 // EEPROM identifier
-#define EEPROM_IDENT   0x140B   // to identify if EEPROM was written by this program
+#define EEPROM_IDENT   0x140C   // to identify if EEPROM was written by this program
 
 //Beep
 #define SetBeepCoolTime 200
@@ -241,7 +241,7 @@ void setup() {
 
   //启动arduboy内核
   arduboy.begin();
-  arduboy.setFrameRate(30);
+  arduboy.setFrameRate(15);
 
   //Serial.begin(115200);
 

@@ -10,31 +10,28 @@ void CheckEEPROM() {
     EEPROM[i] = w;
     r = EEPROM[i];
     if (w == r) pass++; else fail++;
+    if (arduboy.nextFrame()) {
+      //显示测试数据
+      arduboy.clear();
+      arduboy.setTextSize(2);
+      SetTextColor(0);
+      arduboy.setCursor(0, 0);
+      arduboy.print(F(" MEM CHECK "));
 
-    //显示测试数据
-    arduboy.clear();
-    arduboy.setTextSize(2);
-    SetTextColor(0);
-    arduboy.setCursor(0, 0);
-    arduboy.print(F(" MEM CHECK "));
+      arduboy.setTextSize(1);
+      arduboy.setCursor(8, 40);
+      arduboy.print(i); arduboy.print(F("/")); arduboy.print(EEPROM.length());
+      SetTextColor(1);
+      arduboy.setCursor(0 + 8, 24); arduboy.print(F("PASS-")); arduboy.print(pass);
+      arduboy.setCursor(64 + 8, 24); arduboy.print(F("FAIL-")); arduboy.print(fail);
 
-    arduboy.setTextSize(1);
-    arduboy.setCursor(8, 40);
-    arduboy.print(i); arduboy.print(F("/")); arduboy.print(EEPROM.length());
-    SetTextColor(1);
-    arduboy.setCursor(0 + 8, 24); arduboy.print(F("PASS-")); arduboy.print(pass);
-    arduboy.setCursor(64 + 8, 24); arduboy.print(F("FAIL-")); arduboy.print(fail);
+      arduboy.setCursor(0 + 8, 32); arduboy.print(F("W -> ")); arduboy.print(w);
+      arduboy.setCursor(64 + 8, 32); arduboy.print(F("R -> ")); arduboy.print(r);
 
-    arduboy.setCursor(0 + 8, 32); arduboy.print(F("W -> ")); arduboy.print(w);
-    arduboy.setCursor(64 + 8, 32); arduboy.print(F("R -> ")); arduboy.print(r);
+      ProgressBar(i, 0, EEPROM.length(), 0, 60, 128, 4, 1);
 
-
-    //进度标
-    arduboy.setCursor(map(i, 0, EEPROM.length(), 0, 92), 52);
-    arduboy.print(((float)i / EEPROM.length())*100); arduboy.print(F("%"));
-    //进度条
-    arduboy.fillRect(0, 60, map(i, 0, EEPROM.length(), 0, 127), 4, 1);
-    arduboy.display();
+      arduboy.display();
+    }
   }
   //EEPROM存储器可用性检查失败
   while (fail != 0) {
@@ -56,7 +53,7 @@ void CheckEEPROM() {
    通过板载的旋转编码器可以上下滚动翻阅EEPROM中的数据
 */
 void ViewEEPRom() {
-  setRotary(0, 1023, 16, 0);
+  setRotary(0, 1023, 4, 0);
   lastbutton = (!digitalRead(BUTTON_PIN));
   arduboy.setTextSize(1);
   do {
