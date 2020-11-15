@@ -25,8 +25,7 @@ void MainScreen() {
       //arduboy.drawSlowXYBitmap(0, 0, Tag, 16, 16, 0);
       arduboy.setCursor(2, 4); arduboy.print(TipName);
       //显示状态
-      arduboy.setCursor(53, 1);
-      arduboy.setTextSize(2);
+      arduboy.setCursor(94, 5);
       switch (LANG) {
         case 0: arduboy.drawSlowXYBitmap(95, 1, S_table[SysState], 28, 14, 0); break;  //中文 Chinese
         default: //英文 English
@@ -560,7 +559,7 @@ void CalibrationScreen() {
       for (byte y = 0; y < 5; y++) {
         for (byte x = 0; x < 2; x++) {
           if (2 * y + x > CalStep) break;
-          arduboy.setCursor(x * 64 + 10, y * 8 + 16);
+          arduboy.setCursor(x * 64 + 4, y * 8 + 16);
           arduboy.print(CalTemp[2 * y + x]);
           arduboy.print((char)248);
           arduboy.print(F("- "));

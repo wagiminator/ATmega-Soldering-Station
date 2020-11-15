@@ -1,48 +1,66 @@
 # 1. Overview
 T12 焊台控制器功能介绍
 T12 Quick Heating Soldering Station featuring
- - 烙铁头温度实时监测
- - Temperature measurement of the tip
- - PID温度控制
- - Direct or PID control of the heater
- - 可以通过编码器进行控制温度
- - Temperature control via rotary encoder
- - 短按编码器进入短时升温模式
- - Boost mode by short pressing rotary encoder switch
- - 长按编码器进入主菜单
- - Setup menu by long pressing rotary encoder switch
- - 手柄震动检测（需要手柄含有震动传感器）
- - Handle movement detection (by checking ball switch)
- - 手柄连接检测（通过判断烙铁头温度是否能够被读取来实现）
- - Iron unconnected detection (by idenfying invalid temperature readings)
- - 定时器设定 - 随眠，关机时间
- - Time driven sleep/power off mode if iron is unused (movement detection)
- - 可以测量主控芯片电压以及温度
- - Measurement of input voltage, Vcc and ATmega's internal temperature
- - 在OLED上实现信息显示
- - Information display on OLED
- - 支持无源蜂鸣器
- - Buzzer
- - 允许设置不同烙铁头的温度校准值
- - Calibrating and managing different soldering tips
- - 设置被保存在EEPROM，掉电不丢失
- - Storing user settings into the EEPROM
- - 允许热插拔烙铁头，并弹出烙铁头配置选择菜单
- - Tip change detection
- - 芯片过热以及低电压报警
- - Chip overheating and low voltage alarm
- - 更好的实时温度条以及实时功率条
- - Better real-time temperature bar and real-time power bar
- - 拥有过渡动画
- - Have transition animation
- - 内置屏幕保护程序
- - Built in screen saver
- - 屏幕翻转设置
- - Screen flip settings
- - 内置英文、中文、日文语言包
- - Built in English, Chinese and Japanese language pack
- - 开机密码设置
- - Set System Password
+- 烙铁头温度实时监测
+- Temperature measurement of the tip
+- PID温度控制
+- Direct or PID control of the heater
+- 可以通过编码器进行控制温度
+- Temperature control via rotary encoder
+- 短按编码器进入短时升温模式
+- Boost mode by short pressing rotary encoder switch
+- 长按编码器进入主菜单
+- Setup menu by long pressing rotary encoder switch
+- 手柄震动检测（需要手柄含有震动传感器）
+- Handle movement detection (by checking ball switch)
+- 手柄连接检测（通过判断烙铁头温度是否能够被读取来实现）
+- Iron unconnected detection (by idenfying invalid temperature readings)
+- 定时器设定 - 随眠，关机时间
+- Time driven sleep/power off mode if iron is unused (movement detection)
+- 可以测量主控芯片电压以及温度
+- Measurement of input voltage, Vcc and ATmega's internal temperature
+- 在OLED上实现信息显示
+- Information display on OLED
+- 支持无源蜂鸣器
+- Buzzer
+- 允许设置不同烙铁头的温度校准值
+- Calibrating and managing different soldering tips
+- 设置被保存在EEPROM，掉电不丢失
+- Storing user settings into the EEPROM
+- 允许热插拔烙铁头，并弹出烙铁头配置选择菜单
+
+=========UI upgraded version =========
+
+- Tip change detection
+- 芯片过热以及低电压报警
+- Chip overheating and low voltage alarm
+- 更好的实时温度条以及实时功率条
+- Better real-time temperature bar and real-time power bar
+- 拥有过渡动画
+- Have transition animation
+- 内置屏幕保护程序
+- Built in screen saver
+- 屏幕翻转设置
+- Screen flip settings
+- 内置英文、中文语言包
+- Built in English and Chinese language pack
+- 开机密码设置
+- System Password
+- 允许设置旋钮方向
+- Knob direction setting menu
+- 内嵌看门狗，宕机自动重启
+- Watchdog timer automatic reset the MCU
+
+- V1.8t7 New features:
+------ EEPROM可用性检查机制
+------ EEPROM availability check
+
+------ 允许保存最大30个烙铁头的配置
+------ 30 preservable soldering tip configurations
+
+------ 9段温度曲线拟合
+------ 9 segments of temperature curve fitting
+
 
 Project Video: https://youtu.be/I9ATDxvQ1Bc
 
@@ -67,19 +85,26 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 ![IMG_20200816_141230_x.jpg](https://image.easyeda.com/pullimage/B0Crwq4ZAkTLbKYQlWMz32sMSgKbYp6pCCGzzExT.jpeg)
 ![IMG_20200816_130923_x.jpg](https://image.easyeda.com/pullimage/BpBMLRUhObBq2KgvY0ECxCkv6uOqRW2V4trbMem0.jpeg)
 
-## UI Upgrade by createskyblue & lihaoyun6
+## UI-V1.8t6 UI Upgrade by createskyblue & lihaoyun6
 
-LHW-createskyblue created an awesome upgrade to the user interface which can be installed optionally. It features:
+![](software/UI_upgrade_by_createskyblue/img/readme/1.jpg)
+Default control interface
 
-- Beautify the detail page and increase the power bar
-- Menus have ICONS
-- Better scrolling animation
-- Get rid of the U8g graphics library and use the ArduBoy graphics Library (Lite) to improve the frame rate and reduce memory usage to make graphics possible
-- Add flip display Settings to adapt to the habits of different people
-- English, Chinese and Japanese language pack
-- Screen saver
-- System Password
-- Better numerical input experience
+![](software/UI_upgrade_by_createskyblue/img/readme/2.jpg)
+EEPROM availability check
+
+![](software/UI_upgrade_by_createskyblue/img/readme/3.jpg)
+Tip menu
+
+![](software/UI_upgrade_by_createskyblue/img/readme/4.jpg)
+9 segments of temperature curve fitting
+Soldering tip calibration page
+
+![](software/UI_upgrade_by_createskyblue/img/readme/5.jpg)
+Temperature calibration coefficient
+
+![](software/UI_upgrade_by_createskyblue/img/readme/6.jpg)
+Encoder direction regulation
 
 Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 	

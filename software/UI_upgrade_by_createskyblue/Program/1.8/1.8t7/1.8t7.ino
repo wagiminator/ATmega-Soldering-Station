@@ -153,7 +153,7 @@ Arduboy2 arduboy;
 #define TIME2SETTLE   950       // time in microseconds to allow OpAmp output to settle
 #define SMOOTHIE      0.05      // OpAmp output smooth factor (1=no smoothing; 0.05 default)
 #define PID_ENABLE    true      // enable PID control
-#define BEEP_ENABLE   false      // enable/disable buzzer
+#define BEEP_ENABLE   true      // enable/disable buzzer
 #define MAINSCREEN    1         // type of main screen (0: big numbers; 1: more infos)
 
 // EEPROM identifier
@@ -253,7 +253,7 @@ PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
     1 - 英文 ENGLISH
     2 - 日语 x (此版本不支持)
 */
-byte LANG = 0;
+byte LANG = 1;
 
 
 
