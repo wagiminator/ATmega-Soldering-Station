@@ -32,34 +32,35 @@ T12 Quick Heating Soldering Station featuring
 =========UI upgraded version =========
 
 - Tip change detection
-- 芯片过热以及低电压报警
+  芯片过热以及低电压报警
 - Chip overheating and low voltage alarm
-- 更好的实时温度条以及实时功率条
+  更好的实时温度条以及实时功率条
 - Better real-time temperature bar and real-time power bar
-- 拥有过渡动画
+  拥有过渡动画
 - Have transition animation
-- 内置屏幕保护程序
+  内置屏幕保护程序
 - Built in screen saver
-- 屏幕翻转设置
+  屏幕翻转设置
 - Screen flip settings
-- 内置英文、中文语言包
+  内置英文、中文语言包
 - Built in English and Chinese language pack
-- 开机密码设置
+  开机密码设置
 - System Password
-- 允许设置旋钮方向
+  允许设置旋钮方向
 - Knob direction setting menu
-- 内嵌看门狗，宕机自动重启
+  内嵌看门狗，宕机自动重启
 - Watchdog timer automatic reset the MCU
 
-- V1.8t7 New features:
------- EEPROM可用性检查机制
------- EEPROM availability check
+V1.8t7 New features:
 
------- 允许保存最大30个烙铁头的配置
------- 30 preservable soldering tip configurations
+-EEPROM可用性检查机制
+EEPROM availability check
 
------- 9段温度曲线拟合
------- 9 segments of temperature curve fitting
+-允许保存最大30个烙铁头的配置
+30 preservable soldering tip configurations
+
+-9段温度曲线拟合
+9 segments of temperature curve fitting
 
 
 Project Video: https://youtu.be/I9ATDxvQ1Bc
@@ -88,23 +89,23 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 ## UI-V1.8t6 UI Upgrade by createskyblue & lihaoyun6
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/1.jpg)
-Default control interface
+###Default control interface
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/2.jpg)
-EEPROM availability check
+###EEPROM availability check
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/3.jpg)
-Tip menu
+###Tip menu
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/4.jpg)
-9 segments of temperature curve fitting
-Soldering tip calibration page
+###9 segments of temperature curve fitting
+###Soldering tip calibration page
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/5.jpg)
-Temperature calibration coefficient
+###Temperature calibration coefficient
 
 ![](software/UI_upgrade_by_createskyblue/img/readme/6.jpg)
-Encoder direction regulation
+###Encoder direction regulation
 
 Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 	
