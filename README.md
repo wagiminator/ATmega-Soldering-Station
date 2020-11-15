@@ -63,12 +63,11 @@ T12 Quick Heating Soldering Station featuring
 -9段温度曲线拟合
 -9 segments of temperature curve fitting
 
-
-Project Video: https://youtu.be/I9ATDxvQ1Bc
-
-Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
-
-Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
+## Links:
+- Project on EasyEDA: https://easyeda.com/wagiminator/z-solderingstation-smd-v2
+- Project Video: https://youtu.be/I9ATDxvQ1Bc
+- Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
+- Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 # 2. Versions, Upgrades and Notes
 
