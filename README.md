@@ -1,4 +1,4 @@
-# 1. Overview
+# 1. Overview #
 T12 焊台控制器功能介绍
 T12 Quick Heating Soldering Station featuring
  - 烙铁头温度实时监测
@@ -52,22 +52,22 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 # 2. Versions, Upgrades and Notes
 
-## Soldering Station v2.0:
+# Soldering Station v2.0: #
 
 ![IMG_20190731_190146_x.jpg](https://image.easyeda.com/pullimage/iSYD3M8FjNd8ndt1cC7noTcUAdRtz9oFH6hKmoNl.jpeg)
 ![IMG_20190731_182904_x.jpg](https://image.easyeda.com/pullimage/kgryPQpReu7YGh16ewXIt2tQha6rTmhtARw9nPZh.jpeg)
 
-## Soldering Station v2.5:
+# Soldering Station v2.5: #
 
 ![IMG_20200621_132138_x2.jpg](https://image.easyeda.com/pullimage/8LPUnbOCw2uFf1ozHYkTESbvH1LjlA1zKstsrS5v.jpeg)
 ![IMG_20200621_121350_x.jpg](https://image.easyeda.com/pullimage/5ZW6mQs1im9htCg3NJSryApeGUiSlwTFXnvxJSLq.jpeg)
 
-## Soldering Station v2.6:
+# Soldering Station v2.6: #
 
 ![IMG_20200816_141230_x.jpg](https://image.easyeda.com/pullimage/B0Crwq4ZAkTLbKYQlWMz32sMSgKbYp6pCCGzzExT.jpeg)
 ![IMG_20200816_130923_x.jpg](https://image.easyeda.com/pullimage/BpBMLRUhObBq2KgvY0ECxCkv6uOqRW2V4trbMem0.jpeg)
 
-## UI Upgrade by createskyblue & lihaoyun6
+# Program v1.6L UI Upgrade by LHW-createskyblue
 
 LHW-createskyblue created an awesome upgrade to the user interface which can be installed optionally. It features:
 
@@ -76,12 +76,20 @@ LHW-createskyblue created an awesome upgrade to the user interface which can be 
 - Better scrolling animation
 - Get rid of the U8g graphics library and use the ArduBoy graphics Library (Lite) to improve the frame rate and reduce memory usage to make graphics possible
 - Add flip display Settings to adapt to the habits of different people
-- English, Chinese and Japanese language pack
-- Screen saver
-- System Password
-- Better numerical input experience
+- Add multilingual support for Chinese and English
 
 Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
+
+#  v1.7+ Program: createskyblue  & UI: lihaoyun6
+	
+- Screen saver
+	屏幕保护程序
+- English, Chinese and Japanese language pack
+	英文、中文、日文语言包
+- System Password
+	开机密码设置
+- Better numerical input experience
+	更好的数值输入体验
 	
 ![](https://image.lceda.cn/pullimage/dD94Lz6baKfVFCMcqzb7acjT7sRY7NwJ7NaJmOt9.gif)
 ![](https://image.lceda.cn/pullimage/zIsCozlXO0gjzfxcF4wCfAmhQwTKoQBLKd5zZtRd.gif)
@@ -89,7 +97,7 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 ![](https://image.lceda.cn/pullimage/ij3I4sFpNrQPefPdkgIqGjraDEWEPJYjb4974HlC.gif)
 ![](https://image.lceda.cn/pullimage/OsLI0MkxMrv7w0GgVg1tZPt6CMrcyhoFSeOnWrzp.gif)
 
-## Notes and Errors
+# Notes and Errors
 
 - In the board version 2.5 the diode D1 may overheat. To be on the safe side, the 18V zener diode D4 should be removed and the soldering station should be operated with a maximum of 20V. Alternatively, the diode D1 can be replaced with an SS54 schottky diode and the BJT Q1 with an FMMT619. 
 
@@ -139,7 +147,7 @@ In addition to the components for the PCB you will need the following:
 ![parts.jpg](https://image.easyeda.com/pullimage/A29gEDpw2Ld6S96m6f88GDKLpD0YJHm0m3R5Tp5r.jpeg)
 ![IMG_20200621_130414_x.jpg](https://image.easyeda.com/pullimage/NQZMhCwVRTmA4HVYrDjr6y938flXDBzT6woWXocX.jpeg)
 
-Make sure that all parts fit nicely into the case. Solder the wires to the connectors and protect them with heat shrinks. Use thick wires (AWG18) for the power connections. Make all connections according to the schematic down below. Solder the wires directly to the corresponding pads on the pcb. To make the soldering station ESD-safe, connect the earth (E) terminal of the aviator plug to a female dupont connector and glue it into the corresponding opening on the case. Now you can connect the soldering station via a male dupont connector to an earth terminal. Upload the firmware and screw the pcb on top of the case.
+Make sure that all parts fit nicely into the case. Solder the wires to the connectors and protect them with heat shrinks. Use thick wires (AWG18) for the power connections. Make all connections according to the schematic down below. Solder the wires directly to the corresponding pads on the pcb. Upload the firmware and screw the pcb on top of the case.
 
 ![connections.png](https://image.easyeda.com/pullimage/q0JfyFSQSTueZhpBkhrBhFbxtL1UqRARK1nrKThv.png)
 

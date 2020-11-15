@@ -19,8 +19,8 @@
 // SolderingStation2
 //
 // ATmega328-controlled Soldering Station for Hakko T12 Tips.
-// 此v1.8t7版本功能简介
-// This 1.8t7 version of the code implements:
+// 此v1.8t6版本功能简介
+// This 1.8t5 version of the code implements:
 // - 烙铁头温度实时监测
 // - Temperature measurement of the tip
 // - PID温度控制
@@ -67,28 +67,6 @@
 // - Knob direction setting menu
 // - 内嵌看门狗，宕机自动重启
 // - Watchdog timer automatic reset the MCU
-
-// - V1.8t7 New features:
-// ------ EEPROM可用性检查机制
-// ------ EEPROM availability check
-
-// ------ 允许保存最大30个烙铁头的配置
-// ------ 30 preservable soldering tip configurations
-
-// ------ 9段温度曲线拟合
-// ------ 9 segments of temperature curve fitting
-
-/*
-增加"EEPROM"和"RESET." 指令，可以给标签命名为指令的名字，点击标签即可执行
-关于"EEPROM"指令:查看EEPROM内容
-关于"RESET."指令：重置EEPROM *警告！ 你会失去所有烙铁头的温度校准数据!!!
-
-Add "EEPROM" and "RESET." to give the label the name of the instruction. Click the label to execute
-Regarding "EEPROM" instruction: View EEPROM contents
-Regarding "RESET." instruction: RESET EEPROM 
-* warning! You will lose all the temperature calibration data for the tip of the soldering iron!!
-*/
-
 
 // Power supply should be in the range of 16V/2A to 24V/3A and well
 // stabilized.
