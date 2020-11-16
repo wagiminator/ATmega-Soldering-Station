@@ -74,15 +74,11 @@ void MainScreen() {
       };
 
     } else {
-      //arduboy.invert(1);
-      arduboy.setTextSize(6);
       SetTextColor(1);
       arduboy.clear();
       if (getChipTemp() > 80 && ((millis() * 4) / 1000) % 2) beep();
       if ((float)Vin / 100 < UnderVoltage && ((millis() * 4) / 1000) % 2) beep();
-      arduboy.setCursor(12, 2);
-
-      if (ShowTemp > 500) arduboy.print(999); else arduboy.print(ShowTemp);
+      DrawNumRect(9, 3, 6, ShowTemp);
       DrawStatusBar(1);
       arduboy.display();
     }
@@ -94,7 +90,7 @@ void DrawNumRect(byte x, byte y, byte size, int n) {
   arduboy.setCursor(3 + x, 3 + y);
   arduboy.setTextSize(size);
   if (ShowTemp > 500) arduboy.print(F("000")); else arduboy.print(n);
-  arduboy.drawRect(1 + x, 1 + y, 89, 39, 0);
+  if (size != 6)arduboy.drawRect(1 + x, 1 + y, 89, 39, 0);
 }
 
 //绘制状态条
@@ -330,18 +326,25 @@ uint8_t MenuScreen(uint8_t selected) {
     selected = getRotary();
     //非线性滑动动画
     SlidingAnimationX += (selected - lastselected) * 56;
-    if (SlidingAnimationX != 0) SlidingAnimationX += 0.55 * (-SlidingAnimationX);
+    if (SlidingAnimationX != 0) SlidingAnimationX += 0.5 * (-SlidingAnimationX);
     lastselected = selected;
-    arduboy.clear();
-    //绘制图标 如果有指定的话
-    for (byte i = 0; i < 5; i++) if (selected - 2 + i >= 0 && selected - 2 + i < Menu_table[MenuLevel]) DrawApp(-72 + i * 56 + SlidingAnimationX, selected - 2 + i + QueryMenuObject());
-    DrawAppText(selected + QueryMenuObject());
-
-    arduboy.display();
+  //  if (arduboy.nextFrame()) {
+      arduboy.clear();
+      //绘制图标 如果有指定的话
+      for (byte i = 0; i < 5; i++) if (selected - 2 + i >= 0 && selected - 2 + i < Menu_table[MenuLevel]) DrawApp(-72 + i * 56 + SlidingAnimationX, selected - 2 + i + QueryMenuObject());
+      DrawAppText(selected + QueryMenuObject());
+      arduboy.display();
+   // }
     CheckLastButton();
     //beep(0);
   } while (digitalRead(BUTTON_PIN) || lastbutton);
+
   beep();
+  /*
+  arduboy.invert(1);
+  delay(50);
+  arduboy.invert(0);
+  */
   return selected;
 }
 
@@ -492,6 +495,7 @@ void ChangeTipScreen() {
   if (selected) arrow = 1;
   setRotary(0, NumberOfTips - 1, 1, selected);
   lastbutton = (!digitalRead(BUTTON_PIN));
+  arduboy.invert(0);
   do {
     //beep(0);
     arduboy.clear();
@@ -540,14 +544,14 @@ void ChangeTipScreen() {
 void CalibrationScreen() {
   float P[4];
   int xx[9];
-  for (int CalStep = 0; CalStep < 9; CalStep++) {
+  for (byte CalStep = 0; CalStep < 9; CalStep++) {
     if (CalStep != 0) setRotary(0, 1023, 1, xx[CalStep - 1]); else setRotary(0, 1023, 1, 0);
     BeepIfWorky = true;
     lastbutton = (!digitalRead(BUTTON_PIN));
     do {
       arduboy.clear();
       arduboy.setTextSize(1);
-      SENSORCheck();       //读取传感器
+      SENSORCheck(0);       //读取传感器
       SetTemp = getRotary();
       Thermostat(1);       //加热控制 - ADC数值为基准
 

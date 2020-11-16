@@ -1,3 +1,6 @@
+## !!! Warning: the version with "t" is the test version, there may be stability problems! Not recommended for production environments
+## !!! 警告：带有“t”的是测试版本，可能存在稳定性问题！不建议用于生产环境
+
 # 1. Overview
 T12 焊台控制器功能介绍
 T12 Quick Heating Soldering Station featuring
@@ -54,20 +57,20 @@ T12 Quick Heating Soldering Station featuring
 
 ## V1.8t7 New features:
 
--EEPROM可用性检查机制
--EEPROM availability check
+- EEPROM可用性检查机制
+- EEPROM availability check
 
--允许保存最大30个烙铁头的配置
+- 允许保存最大30个烙铁头的配置
 - Tip change detection30 preservable soldering tip configurations
 
--9段温度曲线拟合
--9 segments of temperature curve fitting
+- 9段温度曲线拟合
+- 9 segments of temperature curve fitting
 
-## Links:
-- Project on EasyEDA: https://easyeda.com/wagiminator/z-solderingstation-smd-v2
-- Project Video: https://youtu.be/I9ATDxvQ1Bc
-- Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
-- Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
+Project Video: https://youtu.be/I9ATDxvQ1Bc
+
+Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
+
+Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 # 2. Versions, Upgrades and Notes
 
