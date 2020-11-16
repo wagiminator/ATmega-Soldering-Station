@@ -343,7 +343,7 @@ void loop() {
   //HelpMeSerialer();
   ROTARYCheck();      // check rotary encoder (temp/boost setting, enter setup menu)
   SLEEPCheck();       // check and activate/deactivate sleep modes
-  SENSORCheck();      // reads temperature and vibration switch of the iron
+  SENSORCheck(1);      // reads temperature and vibration switch of the iron
   Thermostat(0);       // heater control
   MainScreen();       // updates the main page on the OLED
   //beep(0);

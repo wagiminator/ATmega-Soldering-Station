@@ -166,7 +166,7 @@ void setRotary(int rmin, int rmax, int rstep, int rvalue) {
 }
 
 // reads temperature, vibration switch and supply voltages
-void SENSORCheck() {
+void SENSORCheck(bool mode) {
   // shut off heater in order to measure temperature
 #if UsePMOS
   analogWrite(CONTROL_PIN, 0);
@@ -195,6 +195,8 @@ void SENSORCheck() {
   RawTemp += (temp - RawTemp) * SMOOTHIE;     // stabilize ADC temperature reading
   CurrentTemp = calculateTemp(RawTemp);
 
+
+
   // stabilize displayed temperature when around setpoint
   if ((ShowTemp != Setpoint) || (abs(ShowTemp - CurrentTemp) > 5)) ShowTemp = CurrentTemp;
   if (abs(ShowTemp - Setpoint) <= 1) ShowTemp = Setpoint;
@@ -210,7 +212,7 @@ void SENSORCheck() {
   }
   // checks if tip is present or currently inserted
   if (ShowTemp > 500) TipIsPresent = false;   // tip removed ?
-  if (!TipIsPresent && (ShowTemp < 500)) {    // new tip inserted ?
+  if (!TipIsPresent && (ShowTemp < 500)&&mode) {    // new tip inserted ?
     //关闭加热
 #if UsePMOS
     analogWrite(CONTROL_PIN, 0);
@@ -226,6 +228,7 @@ void SENSORCheck() {
     c0 = LOW;                                 // switch must be released
     setRotary(TEMP_MIN, TEMP_MAX, TEMP_STEP, SetTemp);  // reset rotary encoder
   }
+  
 }
 
 
