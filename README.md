@@ -63,6 +63,8 @@ T12 Quick Heating Soldering Station featuring
 -9段温度曲线拟合
 -9 segments of temperature curve fitting
 
+## !!! 警告：带有“t”的是测试版本，可能存在稳定性问题！不建议用于生产环境
+!!! Warning: the version with "t" is the test version, there may be stability problems! Not recommended for production environments
 
 Project Video: https://youtu.be/I9ATDxvQ1Bc
 
