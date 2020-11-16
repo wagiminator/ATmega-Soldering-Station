@@ -66,11 +66,11 @@ T12 Quick Heating Soldering Station featuring
 - 9段温度曲线拟合
 - 9 segments of temperature curve fitting
 
-Project Video: https://youtu.be/I9ATDxvQ1Bc
-
-Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
-
-Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
+## Links:
+- Project Video: https://youtu.be/I9ATDxvQ1Bc
+- Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
+- Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
+- A great hardware modification: https://oshwhub.com/222465.255411/atmega328p-han-tai
 
 # 2. Versions, Upgrades and Notes
 
