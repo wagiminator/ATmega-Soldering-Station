@@ -129,10 +129,14 @@ Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
 
 # 3. Power Supply Specification Requirements #
 
-Choose a power supply with an output voltage between 16V and 24V which can provide an output current according to the table below. The power supply must be well stabilized. The current and power is determined by the resistance (R = 8 Ohm) of the heater.
+Choose a power supply with an output voltage between 12V and 24V which can provide an output current according to the table below. The power supply must be well stabilized. The current and power is determined by the resistance (R = 8 Ohm) of the heater.
 
 |Voltage (U)|Current (I) = U / R|Power (P) = U² / R|
 |-|-|-|
+|12 V|1.50 A|18 W|
+|13 V|1.63 A|21 W|
+|14 V|1.75 A|25 W|
+|15 V|1.88 A|28 W|
 |16 V|2.00 A|32 W|
 |17 V|2.13 A|36 W|
 |18 V|2.25 A|41 W|
@@ -145,7 +149,7 @@ Choose a power supply with an output voltage between 16V and 24V which can provi
 
 # 4. Temperature Measurement and OpAmp Considerations #
 
-A thermocouple (temperature sensor) is located in the T12 soldering tip. It creates a very small voltage depending on the temperature difference between the hot end and the cold junction (about 40 microvolts per degree Celsius). To measure this, the heater must be switched off since both share the same connections. The low voltage is amplified by the OpAmp and measured by the ADC of the microcontroller. The LMV358 is a very cheap and versatile OpAmp, but not the ideal choice for this task because it has a fairly high input offset voltage and is quite noisy. Although the SolderingStation also works with this OpAmp thanks to the software's smoothing and calibration algorithms, I highly recommend spending a little more money in a better one. The OPA2330AIDR or OPA2333AIDR for instance have the same pinout and can also be used with this board. They provide significantly more accurate and stable temperature measurements.
+A thermocouple (temperature sensor) is located in the T12 soldering tip. It creates a very small voltage depending on the temperature difference between the hot end and the cold junction (about 22 microvolts per degree Celsius). To measure this, the heater must be switched off since both share the same connections. The low voltage is amplified by the OpAmp and measured by the ADC of the microcontroller. The LMV358 is a very cheap and versatile OpAmp, but not the ideal choice for this task because it has a fairly high input offset voltage and is quite noisy. Although the SolderingStation also works with this OpAmp thanks to the software's smoothing and calibration algorithms, I highly recommend spending a little more money in a better one. The OPA2330AIDR or OPA2333AIDR for instance have the same pinout and can also be used with this board. They provide significantly more accurate and stable temperature measurements.
 
 ![SolderingStationV2_LMV358_Noise.png](https://image.easyeda.com/pullimage/Q1peGd04fhp8kQzYYe6WfFqgOCv8MpL39cS0y2rr.png)
 ![SolderingStationV2_OPA2330_Noise.png](https://image.easyeda.com/pullimage/w2mQcD786pNi5hLEd5bqK2hezrsrUUhtttMRZYih.png)
