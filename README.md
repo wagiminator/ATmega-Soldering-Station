@@ -158,9 +158,9 @@ A thermocouple (temperature sensor) is located in the T12 soldering tip. It crea
 
 # 5. Heater High Side Switch with N-Channel MOSFET and Charge Pump #
 
-The microcontroller switches the heater on and off via the MOSFET. Since the temperature measurement must be done over the same line and against
-ground, the MOSFET has to be placed between the supply voltage and the heater (high-side switch). A P-Channel MOSFET is normally used for this configuration. However, N-Channel MOSFETs usually have a lower resistance (RDS (on)), in the case of the IRLR7843 only 3 milliohms. A low resistance means a higher efficiency and a lower heat development of the MOSFET. For an N-channel MOSFET to function as a high-side switch, an additional circuit is required to maintain a positive GATE-TO-SOURCE voltage after the MOSFET is switched on. This is done using a so-called charge pump consisting of a capacitor and a diode.
+The microcontroller switches the heater on and off via the MOSFET. Since the temperature measurement must be done over the same line and against ground, the MOSFET has to be placed between the supply voltage and the heater (high-side switch). A P-Channel MOSFET is normally used for this configuration. However, N-Channel MOSFETs usually have a lower resistance (RDS (on)), in the case of the IRLR7843 only 3 milliohms. A low resistance means a higher efficiency and a lower heat development of the MOSFET. For an N-channel MOSFET to function as a high-side switch, an additional circuit is required to maintain a positive GATE-TO-SOURCE voltage after the MOSFET is switched on. This is done using a so-called charge pump consisting of a capacitor and a diode. The principle of operation is illustrated in the following graphic by [Smallp Tsai](https://github.com/SmallpTsai):
 
+![chargepump.png](https://image.easyeda.com/pullimage/2uMULK2Igux1CcmuzeTBr1Wtl1le8SuoqR9W6blq.png)
 ![SolderingStationV2_ChargePump.png](https://image.easyeda.com/pullimage/UwAxl6ON0Pn9orkxrE9tfgfZAGFxWH5Xc9pkDvmm.png)
 
 # 6. Building Instructions #
