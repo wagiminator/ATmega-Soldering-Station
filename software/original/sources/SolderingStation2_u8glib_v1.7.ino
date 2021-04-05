@@ -17,7 +17,6 @@
 // - Calibrating and managing different soldering tips
 // - Storing user settings into the EEPROM
 // - Tip change detection
-// - Can be used with either N or P channel mosfets
 //
 // Power supply should be in the range of 16V/2A to 24V/3A and well
 // stabilized.
@@ -40,7 +39,7 @@
 
 // Libraries
 #include <U8glib.h>             // https://github.com/olikraus/u8glib
-#include <PID_v1.h>             // https://github.com/wagiminator/ATmega-Soldering-Station/blob/master/software/libraries/Arduino-PID-Library.zip (old cpp version of https://github.com/mblythe86/C-PID-Library/tree/master/PID_v1)
+#include <PID_v1.h>             // https://github.com/mblythe86/C-PID-Library/tree/master/PID_v1
 #include <EEPROM.h>             // for storing user settings into EEPROM
 #include <avr/sleep.h>          // for sleeping during ADC sampling
 
@@ -91,18 +90,6 @@
 
 // EEPROM identifier
 #define EEPROM_IDENT   0xE76C   // to identify if EEPROM was written by this program
-
-// Mosfet selection and control definitions
-#define P_MOSFET      false     // false for N-Channel sosfet and true for P-Channel mosfet
-#ifdef  P_MOSFET                // P-Channel mosfet
-#define HEATER_ON     255
-#define HEATER_OFF    0
-#define HEATER_PWM    255 - Output
-#elif                           // N-Channel mosfet
-#define HEATER_ON     0
-#define HEATER_OFF    255
-#define HEATER_PWM    Output
-#endif
 
 // Define the aggressive and conservative PID tuning parameters
 double aggKp=11, aggKi=0.5, aggKd=1;
@@ -199,7 +186,7 @@ void setup() {
   pinMode(BUTTON_PIN,   INPUT_PULLUP);
   pinMode(SWITCH_PIN,   INPUT_PULLUP);
   
-  analogWrite(CONTROL_PIN, HEATER_OFF); // this shuts off the heater
+  analogWrite(CONTROL_PIN, 255);        // this shuts off the heater
   digitalWrite(BUZZER_PIN, LOW);        // must be LOW when buzzer not in use
 
   // setup ADC
@@ -231,7 +218,7 @@ void setup() {
   calculateTemp();
 
   // turn on heater if iron temperature is well below setpoint
-  if ((CurrentTemp + 20) < DefaultTemp) analogWrite(CONTROL_PIN, HEATER_ON);
+  if ((CurrentTemp + 20) < DefaultTemp) analogWrite(CONTROL_PIN, 0);
 
   // set PID output range and start the PID
   ctrl.SetOutputLimits(0, 255);
@@ -297,7 +284,7 @@ void SLEEPCheck() {
   if (handleMoved) {                    // if handle was moved
     if (inSleepMode) {                  // in sleep or off mode?
       if ((CurrentTemp + 20) < SetTemp) // if temp is well below setpoint
-        analogWrite(CONTROL_PIN, HEATER_ON);    // then start the heater right now
+        analogWrite(CONTROL_PIN, 0);    // then start the heater right now
       beep();                           // beep on wake-up
       beepIfWorky = true;               // beep again when working temperature is reached
     }
@@ -316,7 +303,7 @@ void SLEEPCheck() {
 
 // reads temperature, vibration switch and supply voltages
 void SENSORCheck() {
-  analogWrite(CONTROL_PIN, HEATER_OFF);       // shut off heater in order to measure temperature
+  analogWrite(CONTROL_PIN, 255);              // shut off heater in order to measure temperature
   delayMicroseconds(TIME2SETTLE);             // wait for voltage to settle
   
   double temp = denoiseAnalog(SENSOR_PIN);    // read ADC value for temperature
@@ -324,7 +311,7 @@ void SENSORCheck() {
   if (d != d0) {handleMoved = true; d0 = d;}  // set flag if handle was moved
   if (! SensorCounter--) Vin = getVIN();      // get Vin every now and then
   
-  analogWrite(CONTROL_PIN, HEATER_PWM);       // turn on again heater
+  analogWrite(CONTROL_PIN, Output);           // turn on again heater
   
   RawTemp += (temp - RawTemp) * SMOOTHIE;     // stabilize ADC temperature reading
   calculateTemp();                            // calculate real temperature value
@@ -345,7 +332,7 @@ void SENSORCheck() {
   // checks if tip is present or currently inserted
   if (ShowTemp > 500) TipIsPresent = false;   // tip removed ?
   if (!TipIsPresent && (ShowTemp < 500)) {    // new tip inserted ?
-    analogWrite(CONTROL_PIN, HEATER_OFF);     // shut off heater
+    analogWrite(CONTROL_PIN, 255);            // shut off heater
     beep();                                   // beep for info
     TipIsPresent = true;                      // tip is present now
     ChangeTipScreen();                        // show tip selection screen
@@ -385,7 +372,7 @@ void Thermostat() {
     // turn on heater if current temperature is below setpoint
     if ((CurrentTemp + 0.5) < Setpoint) Output = 0; else Output = 255;
   }
-  analogWrite(CONTROL_PIN, HEATER_PWM);     // set heater PWM
+  analogWrite(CONTROL_PIN, Output);     // set heater PWM
 }
 
 
@@ -525,7 +512,7 @@ void MainScreen() {
 
 // setup screen
 void SetupScreen() {
-  analogWrite(CONTROL_PIN, HEATER_OFF);      // shut off heater
+  analogWrite(CONTROL_PIN, 255);      // shut off heater
   beep();
   uint16_t SaveSetTemp = SetTemp;
   uint8_t selection = 0;
@@ -774,7 +761,7 @@ void CalibrationScreen() {
   beep(); delay (10);
   }
 
-  analogWrite(CONTROL_PIN, HEATER_OFF);       // shut off heater
+  analogWrite(CONTROL_PIN, 255);              // shut off heater
   delayMicroseconds(TIME2SETTLE);             // wait for voltage to settle
   CalTempNew[3] = getChipTemp();              // read chip temperature
   if ((CalTempNew[0] + 10 < CalTempNew[1]) && (CalTempNew[1] + 10 < CalTempNew[2])) {

@@ -32,9 +32,9 @@ T12 Quick Heating Soldering Station featuring
 - Storing user settings into the EEPROM
 - 允许热插拔烙铁头，并弹出烙铁头配置选择菜单
 - Tip change detection
+- Support for N-Channel and P-Channel MOSFETs
 
 ## =========UI upgraded version =========
-
 
 - 芯片过热以及低电压报警
 - Chip overheating and low voltage alarm
