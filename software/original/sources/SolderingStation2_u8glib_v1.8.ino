@@ -54,7 +54,10 @@
 #define VERSION       "v1.8"
 
 // Type of MOSFET
-#define P_MOSFET      false     // false for N-Channel MOSFET and true for P-Channel MOSFET
+#define N_MOSFET                // P_MOSFET or N_MOSFET
+
+// Type of OLED Controller
+#define SSD1306                 // SSD1306 or SH1106
 
 // Type of rotary encoder
 #define ROTARY_TYPE   1         // 0: 2 increments/step; 1: 4 increments/step (default)
@@ -102,14 +105,16 @@
 #define EEPROM_IDENT  0xE76C   // to identify if EEPROM was written by this program
 
 // MOSFET control definitions
-#ifdef  P_MOSFET                // P-Channel MOSFET
+#if defined (P_MOSFET)         // P-Channel MOSFET
   #define HEATER_ON   255
   #define HEATER_OFF  0
   #define HEATER_PWM  255 - Output
-#elif                           // N-Channel MOSFET
+#elif defined (N_MOSFET)       // N-Channel MOSFET
   #define HEATER_ON   0
   #define HEATER_OFF  255
   #define HEATER_PWM  Output
+#else
+  #error Wrong MOSFET type!
 #endif
 
 // Define the aggressive and conservative PID tuning parameters
@@ -190,10 +195,14 @@ uint8_t   SensorCounter = 255;
 // Specify variable pointers and initial PID tuning parameters
 PID ctrl(&Input, &Output, &Setpoint, aggKp, aggKi, aggKd, REVERSE);
  
-// Setup u8g object: uncomment according to the OLED used
-U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0|U8G_I2C_OPT_NO_ACK|U8G_I2C_OPT_FAST);
-//U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_FAST|U8G_I2C_OPT_NO_ACK);
-
+// Setup u8g object depending on OLED controller
+#if defined (SSD1306)
+  U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0|U8G_I2C_OPT_NO_ACK|U8G_I2C_OPT_FAST);
+#elif defined (SH1106)
+  U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_FAST|U8G_I2C_OPT_NO_ACK);
+#else
+  #error Wrong OLED controller type!
+#endif
 
 
 void setup() { 
@@ -820,7 +829,7 @@ void InputNameScreen() {
     beep(); delay (10);
   }
   TipName[CurrentTip][TIPNAMELENGTH - 1] = 0;
-  return value;
+  return;
 }
 
 
