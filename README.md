@@ -177,9 +177,13 @@ In addition to the components for the PCB you will need the following:
 ![parts.jpg](https://image.easyeda.com/pullimage/A29gEDpw2Ld6S96m6f88GDKLpD0YJHm0m3R5Tp5r.jpeg)
 ![IMG_20200621_130414_x.jpg](https://image.easyeda.com/pullimage/NQZMhCwVRTmA4HVYrDjr6y938flXDBzT6woWXocX.jpeg)
 
-Make sure that all parts fit nicely into the case. Solder the wires to the connectors and protect them with heat shrinks. Use thick wires (AWG18) for the power connections. Make all connections according to the schematic down below. Solder the wires directly to the corresponding pads on the pcb. To make the soldering station ESD-safe, connect the earth (E) terminal of the aviator plug to a female dupont connector and glue it into the corresponding opening on the case. Now you can connect the soldering station via a male dupont connector to an earth terminal. Upload the firmware and screw the pcb on top of the case.
+Make sure that all parts fit nicely into the case. Solder the wires to the connectors and protect them with heat shrinks. Use thick wires (AWG18) for the power connections. Make all connections according to the schematic down below but keep in mind, that there's no standard pinout. Solder the wires directly to the corresponding pads on the pcb. To make the soldering station ESD-safe, connect the earth (E) terminal of the aviator plug to a female dupont connector and glue it into the corresponding opening on the case. Now you can connect the soldering station via a male dupont connector to an earth terminal. Upload the firmware and screw the pcb on top of the case.
 
 ![connections.png](https://image.easyeda.com/pullimage/q0JfyFSQSTueZhpBkhrBhFbxtL1UqRARK1nrKThv.png)
+
+The pinout shown works for the [Quecoo handles from aliexpress](https://aliexpress.com/wholesale?SearchText=quecoo+handle). Different handles may have different pinouts. If you are assembling your handle yourself, follow the scheme shown below. The video by [John Glavinos (electronics4all)](https://www.youtube.com/watch?v=DcmiFfuZw38) shows how it's done.
+
+![T12_handle.png](https://image.easyeda.com/pullimage/lltLU6vx2PQw5RX0tyTdofLoEhgYBBF5NR6Qr1Xt.png)
 
 # 7. License #
 
