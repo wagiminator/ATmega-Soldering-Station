@@ -18,6 +18,7 @@
 // - Storing user settings into the EEPROM
 // - Tip change detection
 // - Can be used with either N or P channel mosfets
+// - Screen flip support
 //
 // Power supply should be in the range of 16V/2A to 24V/3A and well
 // stabilized.
@@ -99,6 +100,7 @@
 #define SMOOTHIE      0.05      // OpAmp output smooth factor (1=no smoothing; 0.05 default)
 #define PID_ENABLE    false     // enable PID control
 #define BEEP_ENABLE   true      // enable/disable buzzer
+#define BODYFLIP      false     // enable/disable screen flip
 #define MAINSCREEN    0         // type of main screen (0: big numbers; 1: more infos)
 
 // EEPROM identifier
@@ -131,6 +133,7 @@ uint8_t   timeOfBoost = TIMEOFBOOST;
 uint8_t   MainScrType = MAINSCREEN;
 bool      PIDenable   = PID_ENABLE;
 bool      beepEnable  = BEEP_ENABLE;
+bool      BodyFlip    = BODYFLIP;
 
 // Default values for tips
 uint16_t  CalTemp[TIPMAX][4] = {TEMP200, TEMP280, TEMP360, TEMPCHP};
@@ -141,7 +144,7 @@ uint8_t   NumberOfTips = 1;
 // Menu items
 const char *SetupItems[]       = { "Setup Menu", "Tip Settings", "Temp Settings",
                                    "Timer Settings", "Control Type", "Main Screen",
-                                   "Buzzer", "Information", "Return" };
+                                   "Buzzer", "Screen Flip", "Information", "Return" };
 const char *TipItems[]         = { "Tip:", "Change Tip", "Calibrate Tip", 
                                    "Rename Tip", "Delete Tip", "Add new Tip", "Return" };
 const char *TempItems[]        = { "Temp Settings", "Default Temp", "Sleep Temp", 
@@ -153,6 +156,7 @@ const char *MainScreenItems[]  = { "Main Screen", "Big Numbers", "More Infos" };
 const char *StoreItems[]       = { "Store Settings ?", "No", "Yes" };
 const char *SureItems[]        = { "Are you sure ?", "No", "Yes" };
 const char *BuzzerItems[]      = { "Buzzer", "Disable", "Enable" };
+const char *FlipItems[]        = { "Screen Flip", "Disable", "Enable" };
 const char *DefaultTempItems[] = { "Default Temp", "deg C" };
 const char *SleepTempItems[]   = { "Sleep Temp", "deg C" };
 const char *BoostTempItems[]   = { "Boost Temp", "deg C" };
@@ -237,6 +241,9 @@ void setup() {
 
   // get default values from EEPROM
   getEEPROM();
+
+  // set screen flip
+  SetFlip();
 
   // read supply voltages in mV
   Vcc = getVCC(); Vin = getVIN();
@@ -447,11 +454,12 @@ void getEEPROM() {
     MainScrType =  EEPROM.read(10);
     PIDenable   =  EEPROM.read(11);
     beepEnable  =  EEPROM.read(12);
-    CurrentTip  =  EEPROM.read(13);
-    NumberOfTips = EEPROM.read(14);
+    BodyFlip    =  EEPROM.read(13);
+    CurrentTip  =  EEPROM.read(14);
+    NumberOfTips = EEPROM.read(15);
 
     uint8_t i, j;
-    uint16_t counter = 15;
+    uint16_t counter = 16;
     for (i = 0; i < NumberOfTips; i++) {
       for (j = 0; j < TIPNAMELENGTH; j++) {
         TipName[i][j] = EEPROM.read(counter++);
@@ -482,11 +490,12 @@ void updateEEPROM() {
   EEPROM.update(10, MainScrType);
   EEPROM.update(11, PIDenable);
   EEPROM.update(12, beepEnable);
-  EEPROM.update(13, CurrentTip);
-  EEPROM.update(14, NumberOfTips);
+  EEPROM.update(13, BodyFlip);
+  EEPROM.update(14, CurrentTip);
+  EEPROM.update(15, NumberOfTips);
 
   uint8_t i, j;
-  uint16_t counter = 15;
+  uint16_t counter = 16;
   for (i = 0; i < NumberOfTips; i++) {
     for (j = 0; j < TIPNAMELENGTH; j++) EEPROM.update(counter++, TipName[i][j]);
     for (j = 0; j < 4; j++) {
@@ -494,6 +503,13 @@ void updateEEPROM() {
       EEPROM.update(counter++, CalTemp[i][j] & 0xFF);
     }
   }
+}
+
+
+// check state and flip screen
+void SetFlip() {
+  if (BodyFlip) u8g.setRot180();
+  else          u8g.undoRotation();
 }
 
 
@@ -557,7 +573,8 @@ void SetupScreen() {
       case 3:   PIDenable = MenuScreen(ControlTypeItems, sizeof(ControlTypeItems), PIDenable); break;
       case 4:   MainScrType = MenuScreen(MainScreenItems, sizeof(MainScreenItems), MainScrType); break;
       case 5:   beepEnable = MenuScreen(BuzzerItems, sizeof(BuzzerItems), beepEnable); break;
-      case 6:   InfoScreen(); break;
+      case 6:   BodyFlip = MenuScreen(FlipItems, sizeof(FlipItems), BodyFlip); SetFlip(); break;
+      case 7:   InfoScreen(); break;
       default:  repeat = false; break;
     }
   }  
