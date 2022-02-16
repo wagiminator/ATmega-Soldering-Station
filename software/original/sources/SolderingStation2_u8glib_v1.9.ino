@@ -18,6 +18,8 @@
 // - Storing user settings into the EEPROM
 // - Tip change detection
 // - Can be used with either N or P channel mosfets
+// - Screen flip support
+// - Rotary encoder reverse support
 //
 // Power supply should be in the range of 16V/2A to 24V/3A and well
 // stabilized.
@@ -36,8 +38,9 @@
 // - John Glavinos, https://youtu.be/4YDcWfOQmz4
 // - createskyblue, https://github.com/createskyblue
 // - TaaraLabs, https://github.com/TaaraLabs
+// - muink, https://github.com/muink
 //
-// 2019 - 2021 by Stefan Wagner
+// 2019 - 2022 by Stefan Wagner
 // Project Files (EasyEDA): https://easyeda.com/wagiminator
 // Project Files (Github):  https://github.com/wagiminator
 // License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -51,7 +54,7 @@
 #include <avr/sleep.h>          // for sleeping during ADC sampling
 
 // Firmware version
-#define VERSION       "v1.8"
+#define VERSION       "v1.9"
 
 // Type of MOSFET
 #define N_MOSFET                // P_MOSFET or N_MOSFET
@@ -99,6 +102,8 @@
 #define SMOOTHIE      0.05      // OpAmp output smooth factor (1=no smoothing; 0.05 default)
 #define PID_ENABLE    false     // enable PID control
 #define BEEP_ENABLE   true      // enable/disable buzzer
+#define BODYFLIP      false     // enable/disable screen flip
+#define ECREVERSE     false     // enable/disable rotary encoder reverse
 #define MAINSCREEN    0         // type of main screen (0: big numbers; 1: more infos)
 
 // EEPROM identifier
@@ -131,6 +136,8 @@ uint8_t   timeOfBoost = TIMEOFBOOST;
 uint8_t   MainScrType = MAINSCREEN;
 bool      PIDenable   = PID_ENABLE;
 bool      beepEnable  = BEEP_ENABLE;
+bool      BodyFlip    = BODYFLIP;
+bool      ECReverse   = ECREVERSE;
 
 // Default values for tips
 uint16_t  CalTemp[TIPMAX][4] = {TEMP200, TEMP280, TEMP360, TEMPCHP};
@@ -141,7 +148,7 @@ uint8_t   NumberOfTips = 1;
 // Menu items
 const char *SetupItems[]       = { "Setup Menu", "Tip Settings", "Temp Settings",
                                    "Timer Settings", "Control Type", "Main Screen",
-                                   "Buzzer", "Information", "Return" };
+                                   "Buzzer", "Screen Flip", "EC Reverse", "Information", "Return" };
 const char *TipItems[]         = { "Tip:", "Change Tip", "Calibrate Tip", 
                                    "Rename Tip", "Delete Tip", "Add new Tip", "Return" };
 const char *TempItems[]        = { "Temp Settings", "Default Temp", "Sleep Temp", 
@@ -153,9 +160,11 @@ const char *MainScreenItems[]  = { "Main Screen", "Big Numbers", "More Infos" };
 const char *StoreItems[]       = { "Store Settings ?", "No", "Yes" };
 const char *SureItems[]        = { "Are you sure ?", "No", "Yes" };
 const char *BuzzerItems[]      = { "Buzzer", "Disable", "Enable" };
-const char *DefaultTempItems[] = { "Default Temp", "deg C" };
-const char *SleepTempItems[]   = { "Sleep Temp", "deg C" };
-const char *BoostTempItems[]   = { "Boost Temp", "deg C" };
+const char *FlipItems[]        = { "Screen Flip", "Disable", "Enable" };
+const char *ECReverseItems[]   = { "EC Reverse", "Disable", "Enable" };
+const char *DefaultTempItems[] = { "Default Temp", "\xB0""C" };
+const char *SleepTempItems[]   = { "Sleep Temp", "\xB0""C" };
+const char *BoostTempItems[]   = { "Boost Temp", "\xB0""C" };
 const char *SleepTimerItems[]  = { "Sleep Timer", "Minutes" };
 const char *OffTimerItems[]    = { "Off Timer", "Minutes" };
 const char *BoostTimerItems[]  = { "Boost Timer", "Seconds" };
@@ -237,6 +246,9 @@ void setup() {
 
   // get default values from EEPROM
   getEEPROM();
+
+  // set screen flip
+  SetFlip();
 
   // read supply voltages in mV
   Vcc = getVCC(); Vin = getVIN();
@@ -423,7 +435,7 @@ void beep(){
 void setRotary(int rmin, int rmax, int rstep, int rvalue) {
   countMin  = rmin << ROTARY_TYPE;
   countMax  = rmax << ROTARY_TYPE;
-  countStep = rstep;
+  countStep = ECReverse ? -rstep : rstep;
   count     = rvalue << ROTARY_TYPE;  
 }
 
@@ -447,11 +459,13 @@ void getEEPROM() {
     MainScrType =  EEPROM.read(10);
     PIDenable   =  EEPROM.read(11);
     beepEnable  =  EEPROM.read(12);
-    CurrentTip  =  EEPROM.read(13);
-    NumberOfTips = EEPROM.read(14);
+    BodyFlip    =  EEPROM.read(13);
+    ECReverse   =  EEPROM.read(14);
+    CurrentTip  =  EEPROM.read(15);
+    NumberOfTips = EEPROM.read(16);
 
     uint8_t i, j;
-    uint16_t counter = 15;
+    uint16_t counter = 17;
     for (i = 0; i < NumberOfTips; i++) {
       for (j = 0; j < TIPNAMELENGTH; j++) {
         TipName[i][j] = EEPROM.read(counter++);
@@ -482,11 +496,13 @@ void updateEEPROM() {
   EEPROM.update(10, MainScrType);
   EEPROM.update(11, PIDenable);
   EEPROM.update(12, beepEnable);
-  EEPROM.update(13, CurrentTip);
-  EEPROM.update(14, NumberOfTips);
+  EEPROM.update(13, BodyFlip);
+  EEPROM.update(14, ECReverse);
+  EEPROM.update(15, CurrentTip);
+  EEPROM.update(16, NumberOfTips);
 
   uint8_t i, j;
-  uint16_t counter = 15;
+  uint16_t counter = 17;
   for (i = 0; i < NumberOfTips; i++) {
     for (j = 0; j < TIPNAMELENGTH; j++) EEPROM.update(counter++, TipName[i][j]);
     for (j = 0; j < 4; j++) {
@@ -494,6 +510,13 @@ void updateEEPROM() {
       EEPROM.update(counter++, CalTemp[i][j] & 0xFF);
     }
   }
+}
+
+
+// check state and flip screen
+void SetFlip() {
+  if (BodyFlip) u8g.setRot180();
+  else          u8g.undoRotation();
 }
 
 
@@ -557,7 +580,9 @@ void SetupScreen() {
       case 3:   PIDenable = MenuScreen(ControlTypeItems, sizeof(ControlTypeItems), PIDenable); break;
       case 4:   MainScrType = MenuScreen(MainScreenItems, sizeof(MainScreenItems), MainScrType); break;
       case 5:   beepEnable = MenuScreen(BuzzerItems, sizeof(BuzzerItems), beepEnable); break;
-      case 6:   InfoScreen(); break;
+      case 6:   BodyFlip = MenuScreen(FlipItems, sizeof(FlipItems), BodyFlip); SetFlip(); break;
+      case 7:   ECReverse = MenuScreen(ECReverseItems, sizeof(ECReverseItems), ECReverse); break;
+      case 8:   InfoScreen(); break;
       default:  repeat = false; break;
     }
   }  
