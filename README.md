@@ -70,7 +70,7 @@ T12 Quick Heating Soldering Station featuring
 - Project Video: https://youtu.be/I9ATDxvQ1Bc
 - Video from John Glavinos (electronics4all): https://youtu.be/4YDcWfOQmz4
 - Video from LHW-createskyblue (UI-v1.6L): https://b23.tv/LiOe54
-- A great hardware modification: https://oshwhub.com/222465.255411/atmega328p-han-tai
+- T245 version with P-channel MOSFET by TaaraLabs: https://taaralabs.eu/atmega-t245/
 
 # 2. Versions, Upgrades and Notes
 
